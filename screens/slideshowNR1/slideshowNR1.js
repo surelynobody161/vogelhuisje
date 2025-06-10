@@ -5,10 +5,10 @@ import styles from './styles.js';
 const SlideshowNR1 = () => {
     return (
         <View style={styles.container}>
-            <Image
-                source={require('../../assets/logo.png')}
+            {/* <Image
+                source={require('../../assets/images/teamwork.png')}
                 style={styles.logo}
-            />
+            /> */}
             <Text style={styles.text}>
                 Wauw mooie <Text style={styles.green}>app</Text> en tekst{'\n'}
                 buy een <Text style={styles.green}>huisje</Text>{'\n'}
