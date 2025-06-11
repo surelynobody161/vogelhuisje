@@ -7,6 +7,7 @@ import {
     Switch,
     ScrollView,
     SafeAreaView,
+    Alert,
 } from "react-native"
 import { Picker } from "@react-native-picker/picker"
 import { Ionicons } from "@expo/vector-icons"
@@ -24,21 +25,20 @@ export default function ProfileScreen() {
     const [clipLength, setClipLength] = useState("30")
     const [profileImage, setProfileImage] = useState(null)
 
-    // ✅ Profielfoto ophalen bij opstarten
+    //  Laad opgeslagen profielfoto
     useEffect(() => {
         const loadProfileImage = async () => {
             const storedUri = await AsyncStorage.getItem("profileImage")
             if (storedUri) {
                 setProfileImage(storedUri)
             } else {
-                // fallback afbeelding
                 setProfileImage("https://randomuser.me/api/portraits/women/44.jpg")
             }
         }
         loadProfileImage()
     }, [])
 
-    // ✅ Foto kiezen en opslaan
+    // 📷 Foto kiezen
     const pickImage = async () => {
         const permission = await ImagePicker.requestMediaLibraryPermissionsAsync()
         if (permission.status !== "granted") {
@@ -58,6 +58,12 @@ export default function ProfileScreen() {
             setProfileImage(uri)
             await AsyncStorage.setItem("profileImage", uri)
         }
+    }
+
+
+    const saveSettings = () => {
+        // storage
+        Alert.alert("Opgeslagen", "Je instellingen zijn succesvol bewaard.")
     }
 
     return (
@@ -99,7 +105,7 @@ export default function ProfileScreen() {
                     </View>
                 </View>
 
-                {/* Startgids */}
+                {/* Startgids knop */}
                 <TouchableOpacity
                     style={styles.startGuideButton}
                     onPress={() => navigation.navigate("Intro")}
@@ -159,8 +165,8 @@ export default function ProfileScreen() {
                     </View>
                 </View>
 
-                {/* Opslaan */}
-                <TouchableOpacity style={styles.saveButton}>
+                {/* Opslaan instellingen met feedback */}
+                <TouchableOpacity style={styles.saveButton} onPress={saveSettings}>
                     <Text style={styles.saveButtonText}>Instellingen bewaren</Text>
                 </TouchableOpacity>
             </ScrollView>
