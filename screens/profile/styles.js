@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start",
-        position: "relative",
+
         zIndex: 1,
     },
     backButton: {
@@ -25,10 +25,14 @@ export const styles = StyleSheet.create({
         marginRight: 10,
     },
     headerTitle: {
-        color: "white",
-        fontSize: 18,
-        fontWeight: "bold",
-        justifyContent: "center",
+            color: "white",
+            fontSize: 25,
+            fontWeight: "bold",
+            position: "absolute",
+            left: 0,
+            right: 0,
+            textAlign: "center",
+
     },
     content: {
         flex: 1,

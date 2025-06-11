@@ -25,11 +25,9 @@ export default function ProfileScreen() {
     const [textSize, setTextSize] = useState("medium")
     const [clipLength, setClipLength] = useState("30")
     const [profileImage, setProfileImage] = useState(null)
-
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
 
-    // 🔁 Laden van opgeslagen gegevens
     useEffect(() => {
         const loadData = async () => {
             const storedCamera = await AsyncStorage.getItem("cameraEnabled")
@@ -46,7 +44,6 @@ export default function ProfileScreen() {
             if (storedClipLength) setClipLength(storedClipLength)
             if (storedImage) setProfileImage(storedImage)
             else setProfileImage("https://randomuser.me/api/portraits/women/44.jpg")
-
             if (storedName) setName(storedName)
             if (storedEmail) setEmail(storedEmail)
         }
@@ -91,21 +88,21 @@ export default function ProfileScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* Header */}
-            <View style={styles.header}>
-                <TouchableOpacity style={styles.backButton}>
-                    <Ionicons name="chevron-back" size={24} color="#B9FFBC" />
-                </TouchableOpacity>
-                <Text style={styles.headerTitle}>Mijn Profiel</Text>
-            </View>
-
             <ScrollView style={styles.content}>
+                {/* Header (nu binnen ScrollView, dus niet sticky) */}
+                <View style={styles.header}>
+                    <TouchableOpacity style={styles.backButton}>
+                        <Ionicons name="chevron-back" size={24} color="#B9FFBC" />
+                    </TouchableOpacity>
+                    <Text style={styles.headerTitle}>Mijn Profiel</Text>
+                </View>
+
                 {/* Profielfoto */}
                 <View style={styles.profileSection}>
                     <Image source={{ uri: profileImage }} style={styles.profileImage} />
                     <Text style={styles.profileName}>{name || "Gebruiker"}</Text>
                     <TouchableOpacity style={styles.editPhotoButton} onPress={pickImage}>
-                        <Text style={styles.editPhotoText}>Foto wijzigen</Text>
+                        <Text style={styles.saveButtonText}>Foto wijzigen</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -140,11 +137,8 @@ export default function ProfileScreen() {
                     </View>
                 </View>
 
-                {/* Startgids */}
-                <TouchableOpacity
-                    style={styles.startGuideButton}
-                    onPress={() => navigation.navigate("Intro")}
-                >
+                {/* Startgids knop */}
+                <TouchableOpacity style={styles.startGuideButton} onPress={() => navigation.navigate("Intro")}>
                     <Text style={styles.startGuideButtonText}>Startgids</Text>
                 </TouchableOpacity>
 
@@ -200,13 +194,13 @@ export default function ProfileScreen() {
                     </View>
                 </View>
 
-                {/* Opslaan */}
+                {/* Instellingen opslaan */}
                 <TouchableOpacity style={styles.saveButton} onPress={saveSettings}>
                     <Text style={styles.saveButtonText}>Instellingen bewaren</Text>
                 </TouchableOpacity>
             </ScrollView>
 
-            {/* Navigatie */}
+            {/* Navigatie onderin */}
             <View style={styles.bottomNav}>
                 <TouchableOpacity style={styles.navItem}>
                     <Ionicons name="home-outline" size={24} color="#777" />
