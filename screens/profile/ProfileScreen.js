@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import {
     View,
     Text,
@@ -12,14 +12,53 @@ import { Picker } from "@react-native-picker/picker"
 import { Ionicons } from "@expo/vector-icons"
 import { styles } from "./styles"
 import { useNavigation } from "@react-navigation/native"
+import * as ImagePicker from "expo-image-picker"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 export default function ProfileScreen() {
     const navigation = useNavigation()
 
-    const [cameraEnabled, setCameraEnabled] = React.useState(true)
-    const [notificationsEnabled, setNotificationsEnabled] = React.useState(false)
-    const [textSize, setTextSize] = React.useState("medium")
-    const [clipLength, setClipLength] = React.useState("30")
+    const [cameraEnabled, setCameraEnabled] = useState(true)
+    const [notificationsEnabled, setNotificationsEnabled] = useState(false)
+    const [textSize, setTextSize] = useState("medium")
+    const [clipLength, setClipLength] = useState("30")
+    const [profileImage, setProfileImage] = useState(null)
+
+    // ✅ Profielfoto ophalen bij opstarten
+    useEffect(() => {
+        const loadProfileImage = async () => {
+            const storedUri = await AsyncStorage.getItem("profileImage")
+            if (storedUri) {
+                setProfileImage(storedUri)
+            } else {
+                // fallback afbeelding
+                setProfileImage("https://randomuser.me/api/portraits/women/44.jpg")
+            }
+        }
+        loadProfileImage()
+    }, [])
+
+    // ✅ Foto kiezen en opslaan
+    const pickImage = async () => {
+        const permission = await ImagePicker.requestMediaLibraryPermissionsAsync()
+        if (permission.status !== "granted") {
+            alert("Toegang tot je fotobibliotheek is nodig.")
+            return
+        }
+
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [1, 1],
+            quality: 1,
+        })
+
+        if (!result.canceled) {
+            const uri = result.assets[0].uri
+            setProfileImage(uri)
+            await AsyncStorage.setItem("profileImage", uri)
+        }
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -32,19 +71,16 @@ export default function ProfileScreen() {
             </View>
 
             <ScrollView style={styles.content}>
-                {/* Profile Section */}
+                {/* Profielfoto */}
                 <View style={styles.profileSection}>
-                    <Image
-                        source={{ uri: "https://randomuser.me/api/portraits/women/44.jpg" }}
-                        style={styles.profileImage}
-                    />
+                    <Image source={{ uri: profileImage }} style={styles.profileImage} />
                     <Text style={styles.profileName}>Britney Krabbie</Text>
-                    <TouchableOpacity style={styles.editPhotoButton}>
+                    <TouchableOpacity style={styles.editPhotoButton} onPress={pickImage}>
                         <Text style={styles.editPhotoText}>Foto wijzigen</Text>
                     </TouchableOpacity>
                 </View>
 
-                {/* Personal Information Section */}
+                {/* Persoonlijke gegevens */}
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Persoonlijke gegevens</Text>
 
@@ -63,7 +99,7 @@ export default function ProfileScreen() {
                     </View>
                 </View>
 
-                {/* ✅ Startgids knop BOVEN instellingen */}
+                {/* Startgids */}
                 <TouchableOpacity
                     style={styles.startGuideButton}
                     onPress={() => navigation.navigate("Intro")}
@@ -71,7 +107,7 @@ export default function ProfileScreen() {
                     <Text style={styles.startGuideButtonText}>Startgids</Text>
                 </TouchableOpacity>
 
-                {/* Settings Section */}
+                {/* Instellingen */}
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Instellingen</Text>
 
@@ -123,13 +159,13 @@ export default function ProfileScreen() {
                     </View>
                 </View>
 
-                {/* Save Settings Button */}
+                {/* Opslaan */}
                 <TouchableOpacity style={styles.saveButton}>
                     <Text style={styles.saveButtonText}>Instellingen bewaren</Text>
                 </TouchableOpacity>
             </ScrollView>
 
-            {/* Bottom Navigation */}
+            {/* Navigatie onderaan */}
             <View style={styles.bottomNav}>
                 <TouchableOpacity style={styles.navItem}>
                     <Ionicons name="home-outline" size={24} color="#777" />
