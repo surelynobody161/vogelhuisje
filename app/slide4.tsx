@@ -12,11 +12,11 @@ import {
 } from 'react-native';
 import ProgressBar from '../components/ProgressBar';
 
-export default function Slide1() {
+export default function Slide4() {
     const router = useRouter();
 
-    const fullTitle = 'Scala aan vogelhuisjes';
-    const fullSubtitle = 'Geef vogels een fijne plek!';
+    const fullTitle = 'Bijzondere momenten.';
+    const fullSubtitle = 'Neem bijzondere momenten van je vogels op en bekijk ze later terug!';
 
     const [typedTitle, setTypedTitle] = useState('');
     const [typedSubtitle, setTypedSubtitle] = useState('');
@@ -46,7 +46,7 @@ export default function Slide1() {
                         setTimeout(typeSubtitle, 45);
                     }
                 };
-                setTimeout(typeSubtitle, 300);
+                setTimeout(typeSubtitle, 400);
             }
         };
         typeTitle();
@@ -57,7 +57,7 @@ export default function Slide1() {
             <View style={styles.imageWrapper}>
                 <Animated.View style={{ transform: [{ translateY: imageAnim }] }}>
                     <Image
-                        source={require('../assets/images/diabolical.png')}
+                        source={require('../assets/images/momenten.png')}
                         style={styles.image}
                     />
                     <LinearGradient
@@ -71,14 +71,13 @@ export default function Slide1() {
                 <Text style={styles.title}>{typedTitle}</Text>
                 <Text style={styles.subtitle}>{typedSubtitle}</Text>
 
-                <ProgressBar total={5} currentIndex={1} />
+                <ProgressBar total={5} currentIndex={4} />
 
                 <TouchableOpacity
                     style={styles.arrowButton}
-                    onPress={() => router.replace('/slide2')}
+                    onPress={() => router.push('/tabs')}
                 >
-
-                    <Text style={styles.arrowText}>→</Text>
+                    <Text style={styles.arrowText}>✓</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -96,8 +95,9 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        height: '100%',
-        resizeMode: 'cover',
+        height: 400,
+        resizeMode: 'contain',
+        alignSelf: 'center',
     },
     gradientOverlay: {
         position: 'absolute',
@@ -116,11 +116,15 @@ const styles = StyleSheet.create({
         fontSize: 32,
         fontWeight: 'bold',
         marginBottom: 12,
+        marginTop: -10,
     },
     subtitle: {
         color: 'white',
         fontSize: 22,
         marginBottom: 32,
+        textAlign: 'center',
+        paddingHorizontal: 20,
+        marginTop: -8,
     },
     arrowButton: {
         backgroundColor: '#C9FBCF',
