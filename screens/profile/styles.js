@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         backgroundColor: "white",
     },
     header: {
-        backgroundColor: "#006e41",
+        backgroundColor: "#017F56",
         paddingVertical: 30,
         paddingHorizontal: 16,
         flexDirection: "row",
@@ -16,13 +16,19 @@ export const styles = StyleSheet.create({
         zIndex: 1,
     },
     backButton: {
+        backgroundColor: "#015C40",
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        justifyContent: "center",
+        alignItems: "center",
         marginRight: 10,
     },
     headerTitle: {
         color: "white",
         fontSize: 18,
         fontWeight: "bold",
-        justifyContent: "center"
+        justifyContent: "center",
     },
     content: {
         flex: 1,
@@ -44,16 +50,22 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "bold",
         marginBottom: 10,
+        marginTop: 10,
     },
     editPhotoButton: {
-        backgroundColor: "#006e41",
-        paddingVertical: 8,
-        paddingHorizontal: 20,
+        backgroundColor: "#017F56",
+        marginHorizontal: 20,
+        marginTop: 20,
+        marginBottom: 20,
+        paddingVertical: 12,
+        paddingHorizontal: 30,
         borderRadius: 5,
+        alignItems: "center",
     },
     editPhotoText: {
         color: "white",
-        fontWeight: "500",
+        fontWeight: "bold",
+        fontSize: 16,
     },
     section: {
         backgroundColor: "white",
@@ -85,12 +97,9 @@ export const styles = StyleSheet.create({
         marginLeft: 15,
     },
     infoValue: {
-        infoValue: {
-            fontSize: 14,
-            color: "#555",
-            padding: 4,
-        },
-
+        fontSize: 14,
+        color: "#555",
+        padding: 4,
     },
     settingRow: {
         flexDirection: "row",
@@ -103,7 +112,7 @@ export const styles = StyleSheet.create({
         color: "#333",
     },
     saveButton: {
-        backgroundColor: "#006e41",
+        backgroundColor: "#017F56",
         marginHorizontal: 15,
         marginVertical: 20,
         paddingVertical: 12,
@@ -129,21 +138,20 @@ export const styles = StyleSheet.create({
     },
     activeNavItem: {
         borderTopWidth: 2,
-        borderTopColor: "#006e41",
+        borderTopColor: "#017F56",
     },
     startGuideButton: {
-        backgroundColor: "#006e41",
+        backgroundColor: "#017F56",
+        marginHorizontal: 15,
+        marginVertical: 10,
         paddingVertical: 12,
-        paddingHorizontal: 24,
-        borderRadius: 8,
+        borderRadius: 5,
         alignItems: "center",
-        marginTop: 20,
-        alignSelf: "center",
     },
     startGuideButtonText: {
         color: "#fff",
         fontSize: 16,
-        fontWeight: "600",
+        fontWeight: "bold",
     },
     picker: {
         height: 40,
@@ -152,7 +160,4 @@ export const styles = StyleSheet.create({
         borderRadius: 8,
         marginLeft: 8,
     },
-
-
 })
-

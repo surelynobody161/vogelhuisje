@@ -94,7 +94,7 @@ export default function ProfileScreen() {
             {/* Header */}
             <View style={styles.header}>
                 <TouchableOpacity style={styles.backButton}>
-                    <Ionicons name="chevron-back" size={24} color="white" />
+                    <Ionicons name="chevron-back" size={24} color="#B9FFBC" />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>Mijn Profiel</Text>
             </View>
