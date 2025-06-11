@@ -36,14 +36,14 @@ export default function Slide1() {
             if (titleIndex <= fullTitle.length) {
                 setTypedTitle(fullTitle.slice(0, titleIndex));
                 titleIndex++;
-                setTimeout(typeTitle, 30);
+                setTimeout(typeTitle, 45);
             } else {
                 let subtitleIndex = 0;
                 const typeSubtitle = () => {
                     if (subtitleIndex <= fullSubtitle.length) {
                         setTypedSubtitle(fullSubtitle.slice(0, subtitleIndex));
                         subtitleIndex++;
-                        setTimeout(typeSubtitle, 30);
+                        setTimeout(typeSubtitle, 45);
                     }
                 };
                 setTimeout(typeSubtitle, 300);
