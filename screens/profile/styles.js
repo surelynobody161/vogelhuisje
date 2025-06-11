@@ -33,13 +33,12 @@ export const styles = StyleSheet.create({
     },
     profileImage: {
         width: 100,
+        marginTop: 20,
         height: 100,
         borderRadius: 50,
         borderWidth: 3,
         borderColor: "#ffffff",
         alignSelf: "center",
-        marginTop: -50, // laat 'm in de header vallen
-        zIndex: 2, // zorg dat hij boven ligt
     },
     profileName: {
         fontSize: 18,
@@ -86,8 +85,12 @@ export const styles = StyleSheet.create({
         marginLeft: 15,
     },
     infoValue: {
-        fontSize: 14,
-        color: "#555",
+        infoValue: {
+            fontSize: 14,
+            color: "#555",
+            padding: 4,
+        },
+
     },
     settingRow: {
         flexDirection: "row",
@@ -149,6 +152,7 @@ export const styles = StyleSheet.create({
         borderRadius: 8,
         marginLeft: 8,
     },
+
 
 })
 

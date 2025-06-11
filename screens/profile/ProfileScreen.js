@@ -8,6 +8,7 @@ import {
     ScrollView,
     SafeAreaView,
     Alert,
+    TextInput,
 } from "react-native"
 import { Picker } from "@react-native-picker/picker"
 import { Ionicons } from "@expo/vector-icons"
@@ -25,20 +26,34 @@ export default function ProfileScreen() {
     const [clipLength, setClipLength] = useState("30")
     const [profileImage, setProfileImage] = useState(null)
 
-    //  Laad opgeslagen profielfoto
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+
+    // 🔁 Laden van opgeslagen gegevens
     useEffect(() => {
-        const loadProfileImage = async () => {
-            const storedUri = await AsyncStorage.getItem("profileImage")
-            if (storedUri) {
-                setProfileImage(storedUri)
-            } else {
-                setProfileImage("https://randomuser.me/api/portraits/women/44.jpg")
-            }
+        const loadData = async () => {
+            const storedCamera = await AsyncStorage.getItem("cameraEnabled")
+            const storedNotifications = await AsyncStorage.getItem("notificationsEnabled")
+            const storedTextSize = await AsyncStorage.getItem("textSize")
+            const storedClipLength = await AsyncStorage.getItem("clipLength")
+            const storedImage = await AsyncStorage.getItem("profileImage")
+            const storedName = await AsyncStorage.getItem("userName")
+            const storedEmail = await AsyncStorage.getItem("userEmail")
+
+            if (storedCamera !== null) setCameraEnabled(storedCamera === "true")
+            if (storedNotifications !== null) setNotificationsEnabled(storedNotifications === "true")
+            if (storedTextSize) setTextSize(storedTextSize)
+            if (storedClipLength) setClipLength(storedClipLength)
+            if (storedImage) setProfileImage(storedImage)
+            else setProfileImage("https://randomuser.me/api/portraits/women/44.jpg")
+
+            if (storedName) setName(storedName)
+            if (storedEmail) setEmail(storedEmail)
         }
-        loadProfileImage()
+
+        loadData()
     }, [])
 
-    // 📷 Foto kiezen
     const pickImage = async () => {
         const permission = await ImagePicker.requestMediaLibraryPermissionsAsync()
         if (permission.status !== "granted") {
@@ -60,10 +75,18 @@ export default function ProfileScreen() {
         }
     }
 
-
-    const saveSettings = () => {
-        // storage
-        Alert.alert("Opgeslagen", "Je instellingen zijn succesvol bewaard.")
+    const saveSettings = async () => {
+        try {
+            await AsyncStorage.setItem("cameraEnabled", cameraEnabled.toString())
+            await AsyncStorage.setItem("notificationsEnabled", notificationsEnabled.toString())
+            await AsyncStorage.setItem("textSize", textSize)
+            await AsyncStorage.setItem("clipLength", clipLength)
+            await AsyncStorage.setItem("userName", name)
+            await AsyncStorage.setItem("userEmail", email)
+            Alert.alert("Opgeslagen", "Je instellingen zijn succesvol bewaard.")
+        } catch (error) {
+            Alert.alert("Fout", "Er ging iets mis bij het opslaan.")
+        }
     }
 
     return (
@@ -80,7 +103,7 @@ export default function ProfileScreen() {
                 {/* Profielfoto */}
                 <View style={styles.profileSection}>
                     <Image source={{ uri: profileImage }} style={styles.profileImage} />
-                    <Text style={styles.profileName}>Britney Krabbie</Text>
+                    <Text style={styles.profileName}>{name || "Gebruiker"}</Text>
                     <TouchableOpacity style={styles.editPhotoButton} onPress={pickImage}>
                         <Text style={styles.editPhotoText}>Foto wijzigen</Text>
                     </TouchableOpacity>
@@ -93,19 +116,31 @@ export default function ProfileScreen() {
                     <View style={styles.infoRow}>
                         <Text style={styles.infoLabel}>Naam</Text>
                         <View style={styles.infoValueContainer}>
-                            <Text style={styles.infoValue}>Britney Krabbie</Text>
+                            <TextInput
+                                style={styles.infoValue}
+                                value={name}
+                                onChangeText={setName}
+                                placeholder="Voer je naam in"
+                            />
                         </View>
                     </View>
 
                     <View style={styles.infoRow}>
                         <Text style={styles.infoLabel}>E-mail</Text>
                         <View style={styles.infoValueContainer}>
-                            <Text style={styles.infoValue}>birdney@email.com</Text>
+                            <TextInput
+                                style={styles.infoValue}
+                                value={email}
+                                onChangeText={setEmail}
+                                placeholder="Voer je e-mail in"
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                            />
                         </View>
                     </View>
                 </View>
 
-                {/* Startgids knop */}
+                {/* Startgids */}
                 <TouchableOpacity
                     style={styles.startGuideButton}
                     onPress={() => navigation.navigate("Intro")}
@@ -165,13 +200,13 @@ export default function ProfileScreen() {
                     </View>
                 </View>
 
-                {/* Opslaan instellingen met feedback */}
+                {/* Opslaan */}
                 <TouchableOpacity style={styles.saveButton} onPress={saveSettings}>
                     <Text style={styles.saveButtonText}>Instellingen bewaren</Text>
                 </TouchableOpacity>
             </ScrollView>
 
-            {/* Navigatie onderaan */}
+            {/* Navigatie */}
             <View style={styles.bottomNav}>
                 <TouchableOpacity style={styles.navItem}>
                     <Ionicons name="home-outline" size={24} color="#777" />
