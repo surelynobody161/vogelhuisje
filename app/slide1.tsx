@@ -24,7 +24,6 @@ export default function Slide1() {
     const imageAnim = useRef(new Animated.Value(-100)).current;
 
     useEffect(() => {
-        // Slide-in image
         Animated.timing(imageAnim, {
             toValue: 0,
             duration: 800,
@@ -37,7 +36,7 @@ export default function Slide1() {
             if (titleIndex <= fullTitle.length) {
                 setTypedTitle(fullTitle.slice(0, titleIndex));
                 titleIndex++;
-                setTimeout(typeTitle, 0);
+                setTimeout(typeTitle, 30);
             } else {
                 let subtitleIndex = 0;
                 const typeSubtitle = () => {
