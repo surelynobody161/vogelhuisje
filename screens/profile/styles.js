@@ -8,9 +8,12 @@ export const styles = StyleSheet.create({
     header: {
         backgroundColor: "#006e41",
         paddingVertical: 30,
-        paddingHorizontal: 30,
+        paddingHorizontal: 16,
         flexDirection: "row",
         alignItems: "center",
+        justifyContent: "flex-start",
+        position: "relative",
+        zIndex: 1,
     },
     backButton: {
         marginRight: 10,
@@ -28,10 +31,14 @@ export const styles = StyleSheet.create({
         paddingVertical: 20,
     },
     profileImage: {
-        width: 80,
-        height: 80,
-        borderRadius: 40,
-        marginBottom: 10,
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        borderWidth: 3,
+        borderColor: "#ffffff",
+        alignSelf: "center",
+        marginTop: -50, // laat 'm in de header vallen
+        zIndex: 2, // zorg dat hij boven ligt
     },
     profileName: {
         fontSize: 18,
@@ -120,4 +127,27 @@ export const styles = StyleSheet.create({
         borderTopWidth: 2,
         borderTopColor: "#006e41",
     },
+    startGuideButton: {
+        backgroundColor: "#006e41",
+        paddingVertical: 12,
+        paddingHorizontal: 24,
+        borderRadius: 8,
+        alignItems: "center",
+        marginTop: 20,
+        alignSelf: "center",
+    },
+    startGuideButtonText: {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "600",
+    },
+    picker: {
+        height: 40,
+        width: 160,
+        backgroundColor: "#f0f0f0",
+        borderRadius: 8,
+        marginLeft: 8,
+    },
+
 })
+
