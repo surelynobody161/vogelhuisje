@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import ProgressBar from '../components/ProgressBar';
 
 export default function Intro() {
     const router = useRouter();
@@ -37,11 +38,6 @@ export default function Intro() {
         typeNext();
     }, []);
 
-    const getStyledTypedText = () => {
-        // Omdat je nieuwe tekst geen "app" of "huisje" meer bevat, kun je deze logica zo laten, of aanpassen.
-        return <Text>{typedText}</Text>;
-    };
-
     return (
         <View style={styles.container}>
             <Animated.View style={{ transform: [{ translateY: imageAnim }] }}>
@@ -57,7 +53,10 @@ export default function Intro() {
 
             <View style={styles.textWrapper}>
                 <Text style={styles.text}>{typedText}</Text>
+
             </View>
+
+            <ProgressBar total={5} currentIndex={0} />
 
             <TouchableOpacity style={styles.button} onPress={() => router.push('/slide1')}>
                 <Text style={styles.buttonText}>→</Text>
@@ -90,8 +89,9 @@ const styles = StyleSheet.create({
     },
     textWrapper: {
         paddingHorizontal: 30,
-        minHeight: 100,
+        minHeight: 140,
         justifyContent: 'center',
+        alignItems: 'center',
     },
     text: {
         fontSize: 26,

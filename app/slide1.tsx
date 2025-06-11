@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
+import ProgressBar from '../components/ProgressBar';
 
 export default function Slide1() {
     const router = useRouter();
@@ -31,13 +32,12 @@ export default function Slide1() {
             useNativeDriver: true,
         }).start();
 
-        // Type title
         let titleIndex = 0;
         const typeTitle = () => {
             if (titleIndex <= fullTitle.length) {
                 setTypedTitle(fullTitle.slice(0, titleIndex));
                 titleIndex++;
-                setTimeout(typeTitle, 40);
+                setTimeout(typeTitle, 0);
             } else {
                 let subtitleIndex = 0;
                 const typeSubtitle = () => {
@@ -72,10 +72,13 @@ export default function Slide1() {
                 <Text style={styles.title}>{typedTitle}</Text>
                 <Text style={styles.subtitle}>{typedSubtitle}</Text>
 
+                <ProgressBar total={5} currentIndex={1} />
+
                 <TouchableOpacity
                     style={styles.arrowButton}
                     onPress={() => router.replace('/tabs')}
                 >
+
                     <Text style={styles.arrowText}>→</Text>
                 </TouchableOpacity>
             </View>
