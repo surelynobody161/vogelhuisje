@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="873a73b6-5290-4ddb-ba00-7db8ac8e9716" name="Changes" comment="css file + login globally">
-      <change afterPath="$PROJECT_DIR$/app/(tabs)/loginpage.tsx" afterDir="false" />
+    <list default="true" id="873a73b6-5290-4ddb-ba00-7db8ac8e9716" name="Changes" comment="new">
+      <change afterPath="$PROJECT_DIR$/screens/login/styles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/login/login-page.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/login/login-page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(tabs)/loginpage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/loginpage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/login/login-page.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/login/login-page.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/login/loginpage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,6 +184,7 @@
     <MESSAGE value="chevron colour change" />
     <MESSAGE value="non sticky" />
     <MESSAGE value="css file + login globally" />
-    <option name="LAST_COMMIT_MESSAGE" value="css file + login globally" />
+    <MESSAGE value="new" />
+    <option name="LAST_COMMIT_MESSAGE" value="new" />
   </component>
 </project>
