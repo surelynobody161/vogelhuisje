@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import {
     View,
     Text,
@@ -12,7 +12,6 @@ import {
     Platform,
     ScrollView,
 } from "react-native"
-import { Ionicons } from "@expo/vector-icons"
 
 interface LoginFormData {
     emailOrPhone: string
@@ -35,7 +34,6 @@ export default function LoginPage() {
         setIsSubmitting(true)
 
         try {
-            console.log("Logging in with:", formData)
             await new Promise((resolve) => setTimeout(resolve, 1000))
             Alert.alert("Succes", "Succesvol ingelogd!")
         } catch (error) {
@@ -49,23 +47,17 @@ export default function LoginPage() {
         Alert.alert("Registreren", "Navigeer naar registratie pagina")
     }
 
-    const handleBack = () => {
-        Alert.alert("Terug", "Navigeer terug")
-    }
-
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="light-content" backgroundColor="#017F56" />
-            <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={{ flex: 1 }}
+            >
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    {/* Green Header */}
+                    {/* Green Header zonder back-button */}
                     <View style={styles.greenHeader}>
-                        <TouchableOpacity onPress={handleBack} style={styles.backButton}>
-                            <Ionicons name="arrow-back" size={24} color="white" />
-                        </TouchableOpacity>
-                        <View style={styles.titleContainer}>
-                            <Text style={styles.greenHeaderTitle}>Inloggen</Text>
-                        </View>
+                        <Text style={styles.greenHeaderTitle}>Inloggen</Text>
                     </View>
 
                     {/* Login Form */}
@@ -78,7 +70,9 @@ export default function LoginPage() {
                                 placeholder="E-mailadres of telefoonnummer"
                                 placeholderTextColor="#666"
                                 value={formData.emailOrPhone}
-                                onChangeText={(text) => setFormData((prev) => ({ ...prev, emailOrPhone: text }))}
+                                onChangeText={(text) =>
+                                    setFormData((prev) => ({ ...prev, emailOrPhone: text }))
+                                }
                                 keyboardType="email-address"
                                 autoCapitalize="none"
                                 autoCorrect={false}
@@ -91,7 +85,9 @@ export default function LoginPage() {
                                 placeholder="Wachtwoord"
                                 placeholderTextColor="#666"
                                 value={formData.password}
-                                onChangeText={(text) => setFormData((prev) => ({ ...prev, password: text }))}
+                                onChangeText={(text) =>
+                                    setFormData((prev) => ({ ...prev, password: text }))
+                                }
                                 secureTextEntry
                                 autoCapitalize="none"
                                 autoCorrect={false}
@@ -103,7 +99,9 @@ export default function LoginPage() {
                             onPress={handleLogin}
                             disabled={isSubmitting}
                         >
-                            <Text style={styles.loginButtonText}>{isSubmitting ? "Bezig met inloggen..." : "Log in!"}</Text>
+                            <Text style={styles.loginButtonText}>
+                                {isSubmitting ? "Bezig met inloggen..." : "Log in!"}
+                            </Text>
                         </TouchableOpacity>
 
                         <View style={styles.divider} />
@@ -128,19 +126,9 @@ const styles = StyleSheet.create({
     greenHeader: {
         backgroundColor: "#017F56",
         paddingHorizontal: 20,
-        paddingVertical: 16,
-        flexDirection: "row",
-        alignItems: "center",
-    },
-    backButton: {
-        padding: 4,
-        marginRight: 16,
-    },
-    titleContainer: {
-        flex: 1,
+        paddingVertical: 24,
         alignItems: "center",
         justifyContent: "center",
-        marginRight: 40, // ruimte zodat tekst niet verschuift door de terugknop
     },
     greenHeaderTitle: {
         fontSize: 20,
@@ -159,6 +147,7 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         color: "#333",
         marginBottom: 32,
+        textAlign: "left",
     },
     inputContainer: {
         marginBottom: 20,
