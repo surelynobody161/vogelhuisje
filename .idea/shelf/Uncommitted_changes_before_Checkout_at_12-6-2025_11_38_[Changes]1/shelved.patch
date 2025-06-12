@@ -1,0 +1,15 @@
+Index: app/(tabs)/login-page.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/(tabs)/login-page.tsx b/app/(tabs)/login-page.tsx
+new file mode 100644
+--- /dev/null	(date 1749721026509)
++++ b/app/(tabs)/login-page.tsx	(date 1749721026509)
+@@ -0,0 +1,5 @@
++import LoginPage from '../screens/login/LoginPage';
++
++export default function LoginTab() {
++    return <LoginPage/>;
++}
