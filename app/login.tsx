@@ -55,15 +55,18 @@ export default function LoginPage() {
                 style={{ flex: 1 }}
             >
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    {/* Green Header zonder back-button */}
+                    {/* Groene header met witte tekst */}
                     <View style={styles.greenHeader}>
                         <Text style={styles.greenHeaderTitle}>Inloggen</Text>
                     </View>
 
+                    {/* Zwarte titel net onder de groene header */}
+                    <View style={styles.titleWrapper}>
+                        <Text style={styles.formTitle}>Inloggen</Text>
+                    </View>
+
                     {/* Login Form */}
                     <View style={styles.loginForm}>
-                        <Text style={styles.formTitle}>Inloggen</Text>
-
                         <View style={styles.inputContainer}>
                             <TextInput
                                 style={styles.textInput}
@@ -121,7 +124,7 @@ export default function LoginPage() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "#ffffff", // alles wit
     },
     greenHeader: {
         backgroundColor: "#017F56",
@@ -135,19 +138,24 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: "500",
     },
-    loginForm: {
-        flex: 1,
-        backgroundColor: "white",
-        paddingHorizontal: 24,
-        paddingTop: 32,
-        paddingBottom: 40,
+    titleWrapper: {
+        backgroundColor: "#ffffff", // wit
+        alignItems: "center",
+        paddingTop: 16,
+        paddingBottom: 8,
     },
     formTitle: {
         fontSize: 24,
+        marginTop: 40,
         fontWeight: "600",
         color: "#333",
-        marginBottom: 32,
-        textAlign: "left",
+    },
+    loginForm: {
+        flex: 1,
+        backgroundColor: "#ffffff", // wit
+        paddingHorizontal: 24,
+        paddingTop: 16,
+        paddingBottom: 40,
     },
     inputContainer: {
         marginBottom: 20,
@@ -159,6 +167,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         fontSize: 16,
         color: "#333",
+        marginTop: 10,
     },
     loginButton: {
         backgroundColor: "#017F56",
@@ -182,13 +191,13 @@ const styles = StyleSheet.create({
         backgroundColor: "#017F56",
         alignSelf: "center",
         borderRadius: 2,
-        marginBottom: 32,
+        marginBottom: 70,
     },
     registerText: {
         textAlign: "center",
         fontSize: 16,
         color: "#333",
-        marginBottom: 16,
+        marginBottom: 25,
     },
     registerButton: {
         backgroundColor: "#017F56",
