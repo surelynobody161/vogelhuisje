@@ -6,7 +6,6 @@ import { useNavigation } from "@react-navigation/native"
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import * as ImagePicker from "expo-image-picker"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import { useTextSize } from "../contexts/TextSizeContext"
 import { AppText } from "../components/AppText"
 
 type RootStackParamList = {
@@ -18,7 +17,7 @@ type RootStackParamList = {
 
 export default function ProfielScherm() {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
-    const { tekstGrootte, setTekstGrootte } = useTextSize()
+
     const [cameraAan, setCameraAan] = useState(true)
     const [notificatiesAan, setNotificatiesAan] = useState(false)
     const [clipLengte, setClipLengte] = useState("30")
@@ -34,7 +33,6 @@ export default function ProfielScherm() {
                     const data = JSON.parse(saved)
                     setCameraAan(data.cameraAan)
                     setNotificatiesAan(data.notificatiesAan)
-                    setTekstGrootte(data.tekstGrootte)
                     setClipLengte(data.clipLengte)
                     setProfielfoto(data.profielfoto)
                     setNaam(data.naam)
@@ -66,7 +64,6 @@ export default function ProfielScherm() {
         const data = {
             cameraAan,
             notificatiesAan,
-            tekstGrootte,
             clipLengte,
             profielfoto,
             naam,
@@ -124,14 +121,6 @@ export default function ProfielScherm() {
                     <View style={styles.settingRow}>
                         <AppText style={styles.settingLabel}>Notificaties</AppText>
                         <Switch value={notificatiesAan} onValueChange={setNotificatiesAan} trackColor={{ false: "#d3d3d3", true: "#006e41" }} thumbColor="#ffffff" />
-                    </View>
-                    <View style={styles.settingRow}>
-                        <AppText style={styles.settingLabel}>Tekstgrootte</AppText>
-                        <Picker selectedValue={tekstGrootte} onValueChange={setTekstGrootte} style={styles.picker}>
-                            <Picker.Item label="Klein" value="small" />
-                            <Picker.Item label="Middel" value="medium" />
-                            <Picker.Item label="Groot" value="large" />
-                        </Picker>
                     </View>
                     <View style={styles.settingRow}>
                         <AppText style={styles.settingLabel}>Clip Lengte</AppText>
