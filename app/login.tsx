@@ -1,6 +1,4 @@
-
-
-import { useState } from "react"
+import React, { useState } from "react"
 import {
     View,
     Text,
@@ -37,12 +35,8 @@ export default function LoginPage() {
         setIsSubmitting(true)
 
         try {
-            // Hier zou je normaal je API call doen
             console.log("Logging in with:", formData)
-
-            // Simuleer API call
             await new Promise((resolve) => setTimeout(resolve, 1000))
-
             Alert.alert("Succes", "Succesvol ingelogd!")
         } catch (error) {
             Alert.alert("Fout", "Inloggen mislukt")
@@ -61,20 +55,17 @@ export default function LoginPage() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="light-content" backgroundColor="#2e8b57" />
+            <StatusBar barStyle="light-content" backgroundColor="#017F56" />
             <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    {/* Top Header */}
-                    <View style={styles.topHeader}>
-                        <Text style={styles.topHeaderText}>Inloggen</Text>
-                    </View>
-
                     {/* Green Header */}
                     <View style={styles.greenHeader}>
                         <TouchableOpacity onPress={handleBack} style={styles.backButton}>
                             <Ionicons name="arrow-back" size={24} color="white" />
                         </TouchableOpacity>
-                        <Text style={styles.greenHeaderTitle}>Inloggen</Text>
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.greenHeaderTitle}>Inloggen</Text>
+                        </View>
                     </View>
 
                     {/* Login Form */}
@@ -129,34 +120,27 @@ export default function LoginPage() {
     )
 }
 
-// Styles direct in hetzelfde bestand
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#f5f5f5",
     },
-    topHeader: {
-        backgroundColor: "#e8e8e8",
-        paddingHorizontal: 20,
-        paddingVertical: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: "#ddd",
-    },
-    topHeaderText: {
-        fontSize: 16,
-        color: "#999",
-        fontWeight: "400",
-    },
     greenHeader: {
-        backgroundColor: "#2e8b57",
+        backgroundColor: "#017F56",
         paddingHorizontal: 20,
         paddingVertical: 16,
         flexDirection: "row",
         alignItems: "center",
     },
     backButton: {
-        marginRight: 16,
         padding: 4,
+        marginRight: 16,
+    },
+    titleContainer: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        marginRight: 40, // ruimte zodat tekst niet verschuift door de terugknop
     },
     greenHeaderTitle: {
         fontSize: 20,
@@ -188,7 +172,7 @@ const styles = StyleSheet.create({
         color: "#333",
     },
     loginButton: {
-        backgroundColor: "#2e8b57",
+        backgroundColor: "#017F56",
         paddingVertical: 16,
         borderRadius: 8,
         alignItems: "center",
@@ -206,7 +190,7 @@ const styles = StyleSheet.create({
     divider: {
         width: 60,
         height: 3,
-        backgroundColor: "#2e8b57",
+        backgroundColor: "#017F56",
         alignSelf: "center",
         borderRadius: 2,
         marginBottom: 32,
@@ -218,7 +202,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     registerButton: {
-        backgroundColor: "#2e8b57",
+        backgroundColor: "#017F56",
         paddingVertical: 16,
         borderRadius: 8,
         alignItems: "center",
