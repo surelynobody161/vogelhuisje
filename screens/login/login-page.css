@@ -1,0 +1,159 @@
+.login-container {
+    max-width: 375px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Top Header */
+.top-header {
+    background-color: #e8e8e8;
+    padding: 16px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.top-header span {
+    font-size: 16px;
+    color: #999;
+    font-weight: 400;
+}
+
+/* Green Header */
+.green-header {
+    background-color: #2e8b57;
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.back-arrow {
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.back-arrow:hover {
+    opacity: 0.8;
+}
+
+.green-header h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+/* Login Form */
+.login-form {
+    background-color: white;
+    padding: 32px 24px;
+    margin: 0;
+    min-height: calc(100vh - 120px);
+}
+
+.login-form h2 {
+    margin: 0 0 32px 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px 12px;
+    border: none;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    box-sizing: border-box;
+    transition: background-color 0.2s;
+}
+
+.form-input:focus {
+    outline: none;
+    background-color: #e8e8e8;
+}
+
+.form-input::placeholder {
+    color: #666;
+    font-size: 16px;
+}
+
+.login-btn {
+    width: 100%;
+    background-color: #2e8b57;
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 24px 0;
+    transition: background-color 0.2s;
+}
+
+.login-btn:hover {
+    background-color: #267a4a;
+}
+
+.divider {
+    width: 60px;
+    height: 3px;
+    background-color: #2e8b57;
+    margin: 32px auto;
+    border-radius: 2px;
+}
+
+.register-text {
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    margin: 24px 0 16px 0;
+}
+
+.register-btn {
+    width: 100%;
+    background-color: #2e8b57;
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.register-btn:hover {
+    background-color: #267a4a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 375px) {
+    .login-container {
+        max-width: 100%;
+    }
+
+    .login-form {
+        padding: 24px 20px;
+    }
+}
+
+/* Focus states for accessibility */
+.login-btn:focus,
+.register-btn:focus {
+    outline: 2px solid #2e8b57;
+    outline-offset: 2px;
+}
+
+.form-input:focus {
+    box-shadow: 0 0 0 2px #2e8b57;
+}
