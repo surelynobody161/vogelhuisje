@@ -12,6 +12,8 @@ const birdhouses = [
     { id: '4', name: 'Vogelhuisje D', price: '€ 10.95/jaar', sale: false, image: require('../assets/images/vogelhuisa.png') },
 ];
 
+//test
+
 export default function App() {
     const router = useRouter();
 
