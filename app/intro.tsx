@@ -62,7 +62,7 @@ export default function Intro() {
                 <Text style={styles.buttonText}>→</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => router.push('/shop')}>
-                <Text style={styles.buttonText}>→</Text>
+                <Text style={styles.buttonText}>Shop</Text>
             </TouchableOpacity>
         </View>
     );
