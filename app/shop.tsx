@@ -13,6 +13,8 @@ const birdhouses = [
     { id: '4', name: 'Vogelhuisje D', price: '€ 10.95/jaar', size: 'Groot', sale: false, image: require('../assets/images/vogelhuisa.png') },
 ];
 
+//test
+
 export default function Shop() {
     const router = useRouter();
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
