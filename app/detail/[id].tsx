@@ -1,6 +1,7 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useFavorites } from '../FavoritesContext';
 
 const birdhouses = [
     { id: '1', name: 'Vogelhuisje A', price: '€ 14.95/jaar', size: 'Klein', sale: false, image: require('../../assets/images/vogelhuisa.png') },
@@ -13,6 +14,8 @@ export default function Detail() {
     const { id } = useLocalSearchParams();
     const router = useRouter();
     const product = birdhouses.find(b => b.id === id);
+    const { favorites, toggleFavorite } = useFavorites();
+    const isFavorite = favorites.includes(product.id);
 
     if (!product) return <Text>Niet gevonden</Text>;
 
@@ -22,8 +25,8 @@ export default function Detail() {
             <View style={styles.topSection}>
                 <Text style={styles.header}>Details</Text>
                 <Image source={product.image} style={styles.image} />
-                <TouchableOpacity style={styles.heartButton}>
-                    <Ionicons name="heart" size={24} color="orangered" />
+                <TouchableOpacity style={styles.heartButton} onPress={() => toggleFavorite(product.id)}>
+                    <Ionicons name={isFavorite ? "heart" : "heart-outline"} size={24} color="orangered" />
                 </TouchableOpacity>
             </View>
 
