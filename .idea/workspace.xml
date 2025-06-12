@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="873a73b6-5290-4ddb-ba00-7db8ac8e9716" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/screens/login/login-page.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/screens/login/login-page.js" afterDir="false" />
+    <list default="true" id="873a73b6-5290-4ddb-ba00-7db8ac8e9716" name="Changes" comment="css file + login globally">
+      <change afterPath="$PROJECT_DIR$/app/(tabs)/loginpage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/login/login-page.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/login/login-page.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,24 +45,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.profile.js.executor": "Run",
-    "Node.js.styles.js.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "inlog",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Users\\krabr\\PhpstormProjects\\vogelhuisje\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.profile.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.styles.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;inlog&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\krabr\\PhpstormProjects\\vogelhuisje\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\krabr\PhpstormProjects\vogelhuisje\screens\login" />
@@ -180,6 +181,7 @@
     <MESSAGE value="profiel foto onder header" />
     <MESSAGE value="chevron colour change" />
     <MESSAGE value="non sticky" />
-    <option name="LAST_COMMIT_MESSAGE" value="non sticky" />
+    <MESSAGE value="css file + login globally" />
+    <option name="LAST_COMMIT_MESSAGE" value="css file + login globally" />
   </component>
 </project>

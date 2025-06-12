@@ -1,5 +1,5 @@
 import "./login-page.css"
-import { ArrowLeft } from "lucide-react"
+
 
 export default function LoginPage() {
     return (
@@ -11,7 +11,6 @@ export default function LoginPage() {
 
             {/* Green Header */}
             <div className="green-header">
-                <ArrowLeft size={24} className="back-arrow" />
                 <h1>Inloggen</h1>
             </div>
 
