@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "600",
         color: "#333",
+        marginTop: 35,
     },
     loginForm: {
         flex: 1,
@@ -166,6 +167,8 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         fontSize: 16,
         color: "#333",
+        marginBottom: 2,
+
     },
     loginButton: {
         backgroundColor: "#017F56",
@@ -182,6 +185,7 @@ const styles = StyleSheet.create({
         color: "white",
         fontSize: 16,
         fontWeight: "600",
+
     },
     divider: {
         width: 60,
@@ -189,13 +193,13 @@ const styles = StyleSheet.create({
         backgroundColor: "#017F56",
         alignSelf: "center",
         borderRadius: 2,
-        marginBottom: 32,
+        marginBottom: 70,
     },
     registerText: {
         textAlign: "center",
         fontSize: 16,
         color: "#333",
-        marginBottom: 16,
+        marginBottom: 20,
     },
     registerButton: {
         backgroundColor: "#017F56",
