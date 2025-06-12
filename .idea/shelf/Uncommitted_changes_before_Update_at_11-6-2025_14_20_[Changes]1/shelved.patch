@@ -1,0 +1,167 @@
+Index: screens/profile/styles.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/screens/profile/styles.js b/screens/profile/styles.js
+new file mode 100644
+--- /dev/null	(date 1749557814828)
++++ b/screens/profile/styles.js	(date 1749557814828)
+@@ -0,0 +1,123 @@
++import { StyleSheet } from "react-native"
++
++export const styles = StyleSheet.create({
++    container: {
++        flex: 1,
++        backgroundColor: "#f5f5f5",
++    },
++    header: {
++        backgroundColor: "#006e41",
++        paddingVertical: 30,
++        paddingHorizontal: 30,
++        flexDirection: "row",
++        alignItems: "center",
++    },
++    backButton: {
++        marginRight: 10,
++    },
++    headerTitle: {
++        color: "white",
++        fontSize: 18,
++        fontWeight: "bold",
++    },
++    content: {
++        flex: 1,
++    },
++    profileSection: {
++        alignItems: "center",
++        paddingVertical: 20,
++    },
++    profileImage: {
++        width: 80,
++        height: 80,
++        borderRadius: 40,
++        marginBottom: 10,
++    },
++    profileName: {
++        fontSize: 18,
++        fontWeight: "bold",
++        marginBottom: 10,
++    },
++    editPhotoButton: {
++        backgroundColor: "#006e41",
++        paddingVertical: 8,
++        paddingHorizontal: 20,
++        borderRadius: 5,
++    },
++    editPhotoText: {
++        color: "white",
++        fontWeight: "500",
++    },
++    section: {
++        backgroundColor: "white",
++        marginHorizontal: 15,
++        marginVertical: 10,
++        borderRadius: 8,
++        padding: 15,
++    },
++    sectionTitle: {
++        fontSize: 16,
++        fontWeight: "bold",
++        marginBottom: 15,
++    },
++    infoRow: {
++        flexDirection: "row",
++        justifyContent: "space-between",
++        alignItems: "center",
++        marginBottom: 12,
++    },
++    infoLabel: {
++        fontSize: 14,
++        color: "#333",
++    },
++    infoValueContainer: {
++        backgroundColor: "#f0f0f0",
++        padding: 8,
++        borderRadius: 5,
++        flex: 1,
++        marginLeft: 15,
++    },
++    infoValue: {
++        fontSize: 14,
++        color: "#555",
++    },
++    settingRow: {
++        flexDirection: "row",
++        justifyContent: "space-between",
++        alignItems: "center",
++        marginBottom: 15,
++    },
++    settingLabel: {
++        fontSize: 14,
++        color: "#333",
++    },
++    saveButton: {
++        backgroundColor: "#006e41",
++        marginHorizontal: 15,
++        marginVertical: 20,
++        paddingVertical: 12,
++        borderRadius: 5,
++        alignItems: "center",
++    },
++    saveButtonText: {
++        color: "white",
++        fontWeight: "bold",
++        fontSize: 16,
++    },
++    bottomNav: {
++        flexDirection: "row",
++        backgroundColor: "white",
++        borderTopWidth: 1,
++        borderTopColor: "#e0e0e0",
++        height: 60,
++    },
++    navItem: {
++        flex: 1,
++        justifyContent: "center",
++        alignItems: "center",
++    },
++    activeNavItem: {
++        borderTopWidth: 2,
++        borderTopColor: "#006e41",
++    },
++})
+Index: app/(tabs)/index.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { Image } from 'expo-image';\r\nimport { Platform, StyleSheet } from 'react-native';\r\n\r\nimport { HelloWave } from '@/components/HelloWave';\r\nimport ParallaxScrollView from '@/components/ParallaxScrollView';\r\nimport { ThemedText } from '@/components/ThemedText';\r\nimport { ThemedView } from '@/components/ThemedView';\r\n\r\nexport default function HomeScreen() {\r\n  return (\r\n    <ParallaxScrollView\r\n      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}\r\n      headerImage={\r\n        <Image\r\n          source={require('@/assets/images/partial-react-logo.png')}\r\n          style={styles.reactLogo}\r\n        />\r\n      }>\r\n      <ThemedView style={styles.titleContainer}>\r\n        <ThemedText type=\"title\">Welcome!</ThemedText>\r\n        <HelloWave />\r\n      </ThemedView>\r\n      <ThemedView style={styles.stepContainer}>\r\n        <ThemedText type=\"subtitle\">Step 1: Try it</ThemedText>\r\n        <ThemedText>\r\n          Edit <ThemedText type=\"defaultSemiBold\">app/(tabs)/index.tsx</ThemedText> to see changes.\r\n          Press{' '}\r\n          <ThemedText type=\"defaultSemiBold\">\r\n            {Platform.select({\r\n              ios: 'cmd + d',\r\n              android: 'cmd + m',\r\n              web: 'F12',\r\n            })}\r\n          </ThemedText>{' '}\r\n          to open developer tools.\r\n        </ThemedText>\r\n      </ThemedView>\r\n      <ThemedView style={styles.stepContainer}>\r\n        <ThemedText type=\"subtitle\">Step 2: Explore</ThemedText>\r\n        <ThemedText>\r\n          {`Tap the Explore tab to learn more about what's included in this starter app.`}\r\n        </ThemedText>\r\n      </ThemedView>\r\n      <ThemedView style={styles.stepContainer}>\r\n        <ThemedText type=\"subtitle\">Step 3: Get a fresh start</ThemedText>\r\n        <ThemedText>\r\n          {`When you're ready, run `}\r\n          <ThemedText type=\"defaultSemiBold\">npm run reset-project</ThemedText> to get a fresh{' '}\r\n          <ThemedText type=\"defaultSemiBold\">app</ThemedText> directory. This will move the current{' '}\r\n          <ThemedText type=\"defaultSemiBold\">app</ThemedText> to{' '}\r\n          <ThemedText type=\"defaultSemiBold\">app-example</ThemedText>.\r\n        </ThemedText>\r\n      </ThemedView>\r\n    </ParallaxScrollView>\r\n  );\r\n}\r\n\r\nconst styles = StyleSheet.create({\r\n  titleContainer: {\r\n    flexDirection: 'row',\r\n    alignItems: 'center',\r\n    gap: 8,\r\n  },\r\n  stepContainer: {\r\n    gap: 8,\r\n    marginBottom: 8,\r\n  },\r\n  reactLogo: {\r\n    height: 178,\r\n    width: 290,\r\n    bottom: 0,\r\n    left: 0,\r\n    position: 'absolute',\r\n  },\r\n});\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/(tabs)/index.tsx b/app/(tabs)/index.tsx
+--- a/app/(tabs)/index.tsx	(revision 78ef49e269ab8a858dad1eb7fb33c6301cd03691)
++++ b/app/(tabs)/index.tsx	(date 1749558618030)
+@@ -55,6 +55,8 @@
+   );
+ }
+ 
++
++
+ const styles = StyleSheet.create({
+   titleContainer: {
+     flexDirection: 'row',
+Index: app/profile.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/profile.tsx b/app/profile.tsx
+new file mode 100644
+--- /dev/null	(date 1749557183264)
++++ b/app/profile.tsx	(date 1749557183264)
+@@ -0,0 +1,5 @@
++import ProfileScreen from '../screens/profile/ProfileScreen';
++
++export default function ProfileTab() {
++    return <ProfileScreen />;
++}

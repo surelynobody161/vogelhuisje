@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="873a73b6-5290-4ddb-ba00-7db8ac8e9716" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/screens/login/login-page.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/screens/login/login-page.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="profile" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Zoruasy&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/surelynobody161/vogelhuisje.git&quot;,
+    &quot;accountId&quot;: &quot;5df40dae-57e7-4188-aba0-8c6a0e5a102d&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2yJY4V5KU3TzXyAbiC5qgY9IMjm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.profile.js.executor": "Run",
+    "Node.js.styles.js.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "inlog",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\krabr\\PhpstormProjects\\vogelhuisje\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\krabr\PhpstormProjects\vogelhuisje\screens\login" />
+      <recent name="C:\Users\krabr\PhpstormProjects\vogelhuisje\screens\profile" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="profile.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/screens/profile/profile.js" working-dir="$PROJECT_DIR$/screens/profile">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.profile.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PS-243.26053.13" />
+        <option value="bundled-php-predefined-a98d8de5180a-1ec7b7818973-com.jetbrains.php.sharedIndexes-PS-243.26053.13" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="873a73b6-5290-4ddb-ba00-7db8ac8e9716" name="Changes" comment="" />
+      <created>1749553952017</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749553952017</updated>
+      <workItem from="1749553953270" duration="4574000" />
+      <workItem from="1749644186217" duration="2418000" />
+      <workItem from="1749668935393" duration="4551000" />
+      <workItem from="1749719054526" duration="1339000" />
+      <workItem from="1749720647861" duration="218000" />
+    </task>
+    <task id="LOCAL-00001" summary="Commit profile, dummy data">
+      <option name="closed" value="true" />
+      <created>1749644480947</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1749644480947</updated>
+    </task>
+    <task id="LOCAL-00002" summary="picker install, startgids button">
+      <option name="closed" value="true" />
+      <created>1749668402166</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1749668402166</updated>
+    </task>
+    <task id="LOCAL-00003" summary="witte background">
+      <option name="closed" value="true" />
+      <created>1749669754631</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1749669754631</updated>
+    </task>
+    <task id="LOCAL-00004" summary="local storage + image picker on profile">
+      <option name="closed" value="true" />
+      <created>1749670200016</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1749670200016</updated>
+    </task>
+    <task id="LOCAL-00005" summary="laden van profielkfoto, alert als het is opgeslagen">
+      <option name="closed" value="true" />
+      <created>1749670293735</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1749670293735</updated>
+    </task>
+    <task id="LOCAL-00006" summary="profiel foto onder header">
+      <option name="closed" value="true" />
+      <created>1749671286373</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1749671286373</updated>
+    </task>
+    <task id="LOCAL-00007" summary="chevron colour change">
+      <option name="closed" value="true" />
+      <created>1749674039474</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1749674039474</updated>
+    </task>
+    <task id="LOCAL-00008" summary="non sticky">
+      <option name="closed" value="true" />
+      <created>1749674401639</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1749674401639</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Commit profile, dummy data" />
+    <MESSAGE value="Commit profile, instellingen" />
+    <MESSAGE value="picker install, startgids button" />
+    <MESSAGE value="witte background" />
+    <MESSAGE value="local storage + image picker on profile" />
+    <MESSAGE value="laden van profielkfoto, alert als het is opgeslagen" />
+    <MESSAGE value="profiel foto onder header" />
+    <MESSAGE value="chevron colour change" />
+    <MESSAGE value="non sticky" />
+    <option name="LAST_COMMIT_MESSAGE" value="non sticky" />
+  </component>
+</project>

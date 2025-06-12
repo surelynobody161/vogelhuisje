@@ -1,0 +1,21 @@
+Index: app.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import SlideshowNR1 from './screens/slideshowNR1/slideshowNR1';\r\n\r\nexport default function App() {\r\n    return <SlideshowNR1 />;\r\n}\r\n\r\n\r\n//jykiykuk\r\n// test
+===================================================================
+diff --git a/app.js b/app.js
+--- a/app.js	(revision 78ef49e269ab8a858dad1eb7fb33c6301cd03691)
++++ b/app.js	(date 1749556333845)
+@@ -1,9 +1,8 @@
+ import SlideshowNR1 from './screens/slideshowNR1/slideshowNR1';
++import ProfileScreen from './screens/profile/ProfileScreen';
+ 
+ export default function App() {
+     return <SlideshowNR1 />;
++     <ProfileScreen />;
+ }
+ 
+-
+-//jykiykuk
+-// test
+\ No newline at end of file
