@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
-// Define the type for text size
-type TextSize = 'small' | 'medium' | 'large';
+type TextSize = 'klein' | 'medium' | 'groot';
 const defaultSize: TextSize = 'medium';
 
 // Define the context type
