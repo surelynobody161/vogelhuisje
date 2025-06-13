@@ -1,20 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 export default function NavBar() {
+    const [activePage, setActivePage] = useState('home');
+
     return (
         <View style={styles.navBar}>
-            <TouchableOpacity>
-                <Image source={require('../assets/images/house icon.png')} style={styles.navIcon} />
+            <TouchableOpacity onPress={() => setActivePage('home')}>
+                <View style={styles.iconContainer}>
+                    <Image
+                        source={
+                            activePage === 'home'
+                                ? require('../assets/images/nav-icons/Home_active.png')
+                                : require('../assets/images/nav-icons/Home.png')
+                        }
+                    />
+                </View>
             </TouchableOpacity>
-            <TouchableOpacity>
-                <Image source={require('../assets/images/livestream icon.png')} style={styles.navIcon} />
+            <TouchableOpacity onPress={() => setActivePage('stream')}>
+                <View style={styles.iconContainer}>
+                    <Image
+                        source={
+                            activePage === 'stream'
+                                ? require('../assets/images/nav-icons/Stream_active.png')
+                                : require('../assets/images/nav-icons/Stream.png')
+                        }
+                    />
+                </View>
             </TouchableOpacity>
-            <TouchableOpacity>
-                <Image source={require('../assets/images/search icon.png')} style={styles.navIcon} />
+            <TouchableOpacity onPress={() => setActivePage('search')}>
+                <View style={styles.iconContainer}>
+                    <Image
+                        source={
+                            activePage === 'search'
+                                ? require('../assets/images/nav-icons/Search_active.png')
+                                : require('../assets/images/nav-icons/Search.png')
+                        }
+                    />
+                </View>
             </TouchableOpacity>
-            <TouchableOpacity>
-                <Image source={require('../assets/images/profile icon.png')} style={styles.navIcon} />
+            <TouchableOpacity onPress={() => setActivePage('setting')}>
+                <View style={styles.iconContainer}>
+                    <Image
+                        source={
+                            activePage === 'setting'
+                                ? require('../assets/images/nav-icons/Setting_active.png')
+                                : require('../assets/images/nav-icons/Setting.png')
+                        }
+                    />
+                </View>
             </TouchableOpacity>
         </View>
     );
@@ -29,9 +63,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#00794D',
         paddingBottom: 20,
     },
-    navIcon: {
-        width: 32,
-        height: 32,
-        resizeMode: 'contain',
+    iconContainer: {
+        width: 40,
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
