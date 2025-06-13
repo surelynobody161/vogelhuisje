@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { FavoritesProvider } from './FavoritesContext';
+import { FavoritesProvider } from '../contexts/FavoritesContext';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();

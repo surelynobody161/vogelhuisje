@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import NavBar from '../components/NavBar';
-import { useFavorites } from './FavoritesContext'; // <-- Add this import
+import { useFavorites } from '../contexts/FavoritesContext';
 
 const birdhouses = [
     { id: '1', name: 'Vogelhuisje A', price: '€ 14.95/jaar', size: 'Klein', sale: false, image: require('../assets/images/vogelhuisa.png') },

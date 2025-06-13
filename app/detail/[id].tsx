@@ -1,7 +1,7 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useFavorites } from '../FavoritesContext';
+import { useFavorites } from '../../contexts/FavoritesContext';
 
 const birdhouses = [
     { id: '1', name: 'Vogelhuisje A', price: '€ 14.95/jaar', size: 'Klein', sale: false, image: require('../../assets/images/vogelhuisa.png') },
