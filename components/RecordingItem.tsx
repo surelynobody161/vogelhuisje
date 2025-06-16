@@ -23,10 +23,6 @@ export default function RecordingItem({ recording }: RecordingItemProps) {
                 </View>
 
                 <View style={styles.actionsContainer}>
-                    <TouchableOpacity style={styles.playButton}>
-                        <Ionicons name="play" size={24} color="white" />
-                    </TouchableOpacity>
-
                     <View style={styles.textAndDeleteContainer}>
                         <Text style={styles.viewText}>bekijk uw moment</Text>
 
@@ -34,6 +30,10 @@ export default function RecordingItem({ recording }: RecordingItemProps) {
                             <Text style={styles.deleteButtonText}>verwijder opname</Text>
                         </TouchableOpacity>
                     </View>
+
+                    <TouchableOpacity style={styles.playButton}>
+                        <Ionicons name="play" size={24} color="white" />
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -78,21 +78,11 @@ const styles = StyleSheet.create({
     actionsContainer: {
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between",
-    },
-    playButton: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-        backgroundColor: "#015C40",
-        alignItems: "center",
-        justifyContent: "center",
-        marginRight: 12,
+        justifyContent: "space-between", // dit zorgt dat tekst links staat, knop rechts
     },
     textAndDeleteContainer: {
-        justifyContent: "center",
-        alignItems: "flex-end",
         flex: 1,
+        alignItems: "flex-start", // links uitlijnen
     },
     viewText: {
         color: "white",
@@ -104,11 +94,20 @@ const styles = StyleSheet.create({
         paddingVertical: 6,
         paddingHorizontal: 12,
         borderRadius: 15,
-        alignSelf: "flex-end",
+        alignSelf: "flex-start",
     },
     deleteButtonText: {
         color: "#015C40",
         fontSize: 12,
         fontWeight: "500",
+    },
+    playButton: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        backgroundColor: "#015C40",
+        alignItems: "center",
+        justifyContent: "center",
+        marginLeft: 12,
     },
 })
