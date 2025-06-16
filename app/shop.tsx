@@ -124,7 +124,7 @@ export default function Shop() {
 
 const styles = StyleSheet.create({
     safeArea: { flex: 1, backgroundColor: '#fff' },
-    container: { flex: 1, backgroundColor: '#fff', paddingTop: 50 },
+    container: { flex: 1, backgroundColor: '#fff'},
     header: {
         fontSize: 22,
         fontWeight: 'bold',
