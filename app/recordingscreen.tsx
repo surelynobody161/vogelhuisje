@@ -67,17 +67,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#f5f5f0",
     },
-    header: {
-        backgroundColor: "#00804A",
-        paddingVertical: 15,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    headerTitle: {
-        color: "white",
-        fontSize: 20,
-        fontWeight: "bold",
-    },
+    header: { backgroundColor: "#017F56", paddingVertical: 30, paddingHorizontal: 16, flexDirection: "row", alignItems: "center" },
+
+    headerTitle: { color: "white", fontSize: 25, fontWeight: "bold", textAlign: "center", flex: 1 },
     scrollView: {
         flex: 1,
     },
