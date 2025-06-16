@@ -21,7 +21,7 @@ export default function Shop() {
     const [search, setSearch] = useState('');
     const [showFavorites, setShowFavorites] = useState(false);
 
-    const { favorites, toggleFavorite } = useFavorites(); // <-- Add this line here
+    const { favorites, toggleFavorite } = useFavorites();
 
     // Filtering logic
     let filtered = birdhouses;
