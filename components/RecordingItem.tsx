@@ -24,8 +24,6 @@ export default function RecordingItem({ recording }: RecordingItemProps) {
 
                 <View style={styles.actionsContainer}>
                     <View style={styles.textAndDeleteContainer}>
-                        <Text style={styles.viewText}>bekijk uw moment</Text>
-
                         <TouchableOpacity style={styles.deleteButton}>
                             <Text style={styles.deleteButtonText}>verwijder opname</Text>
                         </TouchableOpacity>
@@ -78,16 +76,11 @@ const styles = StyleSheet.create({
     actionsContainer: {
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between", // dit zorgt dat tekst links staat, knop rechts
+        justifyContent: "space-between",
     },
     textAndDeleteContainer: {
         flex: 1,
-        alignItems: "flex-start", // links uitlijnen
-    },
-    viewText: {
-        color: "white",
-        fontSize: 13,
-        marginBottom: 6,
+        alignItems: "flex-start",
     },
     deleteButton: {
         backgroundColor: "white",
