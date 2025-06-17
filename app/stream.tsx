@@ -1,118 +1,157 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import NavBar from '../components/NavBar';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, SafeAreaView, StatusBar } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-export default function Stream() {
-    const [note, setNote] = useState('');
-    const [notes, setNotes] = useState<{ text: string; timestamp: string }[]>([]);
+const streams = [
+    {
+        id: "1",
+        title: "Vogelhuisje 1",
+        description: "Live stream van het eerste vogelhuisje.",
+    },
+    {
+        id: "2",
+        title: "Vogelhuisje 2",
+        description: "Bekijk de vogels in het tweede vogelhuisje.",
+    },
+    {
+        id: "3",
+        title: "Vogelhuisje 3",
+        description: "Een kijkje in het derde vogelhuisje.",
+    },
+    {
+        id: "4",
+        title: "Vogelhuisje 4",
+        description: "Live beelden van het vierde vogelhuisje.",
+    },
+    {
+        id: "5",
+        title: "Vogelhuisje 5",
+        description: "Het vijfde vogelhuisje in actie.",
+    },
+];
 
-    const handleSaveNote = () => {
-        if (note.trim()) {
-            const timestamp = new Date().toLocaleTimeString();
-            setNotes([...notes, { text: note, timestamp }]);
-            setNote('');
-        }
-    };
-
+export default function StreamList({ navigation }: any) {
     return (
-        <SafeAreaView style={styles.safeArea} edges={['bottom']}>
-            <View style={styles.container}>
-                <Text style={styles.header}>Stream</Text>
+        <SafeAreaView style={styles.container}>
+            <StatusBar barStyle="light-content" backgroundColor="#00804A" />
 
-                {/* Stream Section */}
-                <View style={styles.streamContainer}>
-                    <Text style={styles.streamPlaceholder}>[Stream Playing Here]</Text>
-                </View>
-
-                {/* Notes Section */}
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Write your note here..."
-                        value={note}
-                        onChangeText={setNote}
-                        multiline
-                    />
-                    <TouchableOpacity style={styles.saveButton} onPress={handleSaveNote}>
-                        <Ionicons name="save-outline" size={24} color="white" />
-                    </TouchableOpacity>
-                </View>
-
-                <FlatList
-                    data={notes}
-                    keyExtractor={(item, index) => index.toString()}
-                    contentContainerStyle={styles.notesList}
-                    renderItem={({ item }) => (
-                        <View style={styles.noteCard}>
-                            <Text style={styles.noteText}>{item.text}</Text>
-                            <Text style={styles.timestamp}>{item.timestamp}</Text>
-                        </View>
-                    )}
-                />
-
-                <NavBar />
+            <View style={styles.header}>
+                <Text style={styles.headerTitle}>Live Cameras</Text>
             </View>
+
+            <ScrollView style={styles.scrollView}>
+                <View style={styles.streamsList}>
+                    {streams.map((stream) => (
+                        <View key={stream.id} style={styles.streamItem}>
+                            <View style={styles.streamImageContainer}>
+                                <Text style={styles.placeholderText}>[Image Placeholder]</Text>
+                                <TouchableOpacity
+                                    style={styles.playButton}
+                                    onPress={() => navigation.navigate("StreamDetails", { streamId: stream.id })}
+                                >
+                                    <Ionicons name="play-circle" size={50} color="white" />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.streamDetailsBar}>
+                                <Text style={styles.streamTitle}>{stream.title}</Text>
+                                <TouchableOpacity
+                                    style={styles.goToButton}
+                                    onPress={() => navigation.navigate("RecordingScreen", { streamId: stream.id })}
+                                >
+                                    <Text style={styles.goToButtonText}>Bekijk Mijn Opnames</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    ))}
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    safeArea: { flex: 1, backgroundColor: '#fff' },
-    container: { flex: 1, backgroundColor: '#fff'},
-    header: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: 'white',
-        backgroundColor: '#00794D',
-        paddingVertical: 20,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-    },
-    streamContainer: {
-        height: 200,
-        backgroundColor: '#ddd',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: 10,
-        borderRadius: 10,
-    },
-    streamPlaceholder: { fontSize: 16, color: '#555' },
-    inputContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        margin: 10,
-        backgroundColor: 'white',
-        borderRadius: 10,
-        padding: 10,
-        borderWidth: 1,
-        borderColor: '#00794D',
-    },
-    input: {
+    container: {
         flex: 1,
+        backgroundColor: "#f5f5f0",
+    },
+    header: {
+        backgroundColor: "#017F56",
+        paddingVertical: 30,
+        paddingHorizontal: 16,
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    headerTitle: {
+        color: "white",
+        fontSize: 25,
+        fontWeight: "bold",
+        textAlign: "center",
+        flex: 1,
+    },
+    scrollView: {
+        flex: 1,
+    },
+    streamsList: {
+        paddingHorizontal: 15,
+        paddingBottom: 20,
+    },
+    streamItem: {
+        marginBottom: 15,
+        borderRadius: 10,
+        backgroundColor: "#fff",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+        elevation: 3,
+    },
+    streamImageContainer: {
+        height: 200,
+        backgroundColor: "#e0e0e0",
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative",
+    },
+    placeholderText: {
         fontSize: 16,
-        padding: 10,
-        textAlignVertical: 'top',
+        color: "#666",
     },
-    saveButton: {
-        backgroundColor: '#00794D',
-        padding: 10,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 10,
+    playButton: {
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: [{ translateX: -30 }, { translateY: -30 }],
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        justifyContent: "center",
+        alignItems: "center",
     },
-    notesList: { paddingHorizontal: 10, marginTop: 10 },
-    noteCard: {
-        backgroundColor: '#00794D',
-        padding: 10,
-        borderRadius: 10,
-        marginBottom: 10,
-        borderWidth: 1,
-        borderColor: '#fff',
+    streamDetailsBar: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        backgroundColor: "#fff",
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
     },
-    noteText: { color: 'white', fontSize: 16 },
-    timestamp: { color: '#ddd', fontSize: 12, marginTop: 5, textAlign: 'right' },
+    streamTitle: {
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "#333",
+    },
+    goToButton: {
+        backgroundColor: "#017F56",
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        borderRadius: 5,
+    },
+    goToButtonText: {
+        color: "white",
+        fontSize: 14,
+    },
 });
