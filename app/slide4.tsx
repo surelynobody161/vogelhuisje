@@ -75,7 +75,7 @@ export default function Slide4() {
 
                 <TouchableOpacity
                     style={styles.arrowButton}
-                    onPress={() => router.push('/tabs')}
+                    onPress={() => router.push('/slide5')}
                 >
                     <Text style={styles.arrowText}>✓</Text>
                 </TouchableOpacity>
