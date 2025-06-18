@@ -34,7 +34,9 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      "expo-font"
+      "expo-font",
+      "react-native-video",
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true
