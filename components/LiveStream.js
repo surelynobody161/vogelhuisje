@@ -12,7 +12,7 @@ export default function LiveStream() {
     useEffect(() => {
         const interval = setInterval(async () => {
             if (player.currentTime < player.duration - 10) {
-                player.seekBy(player.duration - 5);
+                player.currentTime = player.duration - 5;
                 player.play();
             }
         }, 1000);
