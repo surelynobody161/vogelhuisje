@@ -19,7 +19,7 @@ export default function ProfielScherm() {
     const [cameraAan, setCameraAan] = useState(true)
     const [notificatiesAan, setNotificatiesAan] = useState(false)
     const [clipLengte, setClipLengte] = useState("30")
-    const [profielfoto, setProfielfoto] = useState("https://randomuser.me/api/portraits/women/44.jpg")
+    const [profielfoto, setProfielfoto] = useState("https://cdn.pixabay.com/photo/2017/02/07/16/47/kingfisher-2046453_640.jpg")
     const [naam, setNaam] = useState("Britney Krabbendam")
     const [email, setEmail] = useState("britney@email.com")
 
