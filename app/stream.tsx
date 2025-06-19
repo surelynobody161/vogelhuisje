@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import NavBar from '../components/NavBar';
+import NavBar from './NavBar';
 
 export default function Stream() {
     const [note, setNote] = useState('');

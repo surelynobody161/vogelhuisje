@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import NavBar from '../components/NavBar';
+import NavBar from './NavBar';
 import { useFavorites } from './FavoritesContext'; // <-- Add this import
 
 const birdhouses = [

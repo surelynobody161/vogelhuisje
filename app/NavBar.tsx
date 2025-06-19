@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import React, {JSX, useState } from 'react'
+import { View, TouchableOpacity, Image, StyleSheet } from 'react-native'
+import { useRouter } from 'expo-router'
 
-export default function NavBar() {
-    const [activePage, setActivePage] = useState('home');
+type PageType = 'home' | 'stream' | 'search' | 'setting'
+
+export default function NavBar(): JSX.Element {
+    const [activePage, setActivePage] = useState<PageType>('home')
+    const router = useRouter()
+
+    const handleNavigation = (page: PageType, route: string): void => {
+        setActivePage(page)
+        router.push(route as any)
+        console.log(`Navigating to: ${route}`)
+    }
 
     return (
         <View style={styles.navBar}>
-            <TouchableOpacity onPress={() => setActivePage('home')}>
+            {/* Home → /mijnhuisjes */}
+            <TouchableOpacity onPress={() => handleNavigation('home', '/mijnHuisjes')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
@@ -14,10 +25,13 @@ export default function NavBar() {
                                 ? require('../assets/images/nav-icons/Home_active.png')
                                 : require('../assets/images/nav-icons/Home.png')
                         }
+                        style={styles.icon}
                     />
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setActivePage('stream')}>
+
+            {/* Stream → /stream */}
+            <TouchableOpacity onPress={() => handleNavigation('stream', '/stream')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
@@ -25,10 +39,13 @@ export default function NavBar() {
                                 ? require('../assets/images/nav-icons/Stream_active.png')
                                 : require('../assets/images/nav-icons/Stream.png')
                         }
+                        style={styles.icon}
                     />
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setActivePage('search')}>
+
+            {/* Shop → /shop */}
+            <TouchableOpacity onPress={() => handleNavigation('search', '/shop')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
@@ -36,10 +53,13 @@ export default function NavBar() {
                                 ? require('../assets/images/nav-icons/Search_active.png')
                                 : require('../assets/images/nav-icons/Search.png')
                         }
+                        style={styles.icon}
                     />
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setActivePage('setting')}>
+
+            {/* Profile → /profile */}
+            <TouchableOpacity onPress={() => handleNavigation('setting', '/profile')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
@@ -47,11 +67,12 @@ export default function NavBar() {
                                 ? require('../assets/images/nav-icons/Setting_active.png')
                                 : require('../assets/images/nav-icons/Setting.png')
                         }
+                        style={styles.icon}
                     />
                 </View>
             </TouchableOpacity>
         </View>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
@@ -69,4 +90,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-});
+    icon: {
+        width: 30,
+        height: 30,
+        resizeMode: 'contain',
+    },
+})
