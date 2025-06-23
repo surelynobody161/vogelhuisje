@@ -1,21 +1,12 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import MijnHuisje from "../components/MijnHuisje";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
+import React from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import MijnHuisje from '../components/MijnHuisje';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 export default function MijnHuisjes() {
     const navigation = useNavigation();
-
-    // Function for details navigation
-    const handleDetailsPress = (huisjeId) => {
-        navigation.navigate('HuisjeDetail', { huisjeId });
-    };
-
-    // Function for shop navigation
-    const handleHuisjesKopen = () => {
-        navigation.navigate('Shop');
-    };
 
     const styles = StyleSheet.create({
         mainContainer: {
@@ -64,55 +55,44 @@ export default function MijnHuisjes() {
             width: 249,
             height: 63,
             borderRadius: 10,
-            textAlign: 'center',
-            padding: 10,
-            margin: 10,
-            display: 'flex',
-            alignItems: 'center',
             justifyContent: 'center',
+            alignItems: 'center',
+            margin: 10,
             elevation: 4,
         },
         huisjeKopenText: {
             color: 'black',
             fontSize: 16,
             fontWeight: 'bold',
-            display: 'flex',
         }
     });
 
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={{ flex: 1 }}>
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <SafeAreaView>
+                <ScrollView>
                     <View style={styles.mainContainer}>
                         <View style={styles.header}>
                             <Text style={styles.headerText}>Mijn huisjes</Text>
                         </View>
-
-                        {/* Pass onDetailsPress to each MijnHuisje */}
-                        <MijnHuisje onDetailsPress={() => handleDetailsPress('huisje1')} />
-                        <MijnHuisje onDetailsPress={() => handleDetailsPress('huisje2')} />
-                        <MijnHuisje onDetailsPress={() => handleDetailsPress('huisje3')} />
-
+                        <MijnHuisje />
+                        <MijnHuisje />
+                        <MijnHuisje />
                         <View style={styles.meerHuisjesTextView}>
                             <Text style={styles.meerHuisjesText}>
                                 Ga naar de lijst met beschikbare vogelhuisjes om meer vogels te bekijken.
                             </Text>
                         </View>
-
                         <View style={styles.huisjeKopenButtonView}>
                             <Pressable
                                 style={styles.huisjeKopenButton}
-                                onPress={handleHuisjesKopen}
+                                onPress={() => navigation.navigate('Shop')}
+                                accessibilityLabel="Ga naar de shop om huisjes te kopen"
                             >
-                                <Text style={styles.huisjeKopenText}>
-                                    Huisjes kopen <AntDesign
-                                    style={styles.huisjeKopenText}
-                                    name="pluscircle"
-                                    size={24}
-                                    color="black"
-                                />
-                                </Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Text style={styles.huisjeKopenText}>Huisjes kopen </Text>
+                                    <AntDesign name="pluscircle" size={24} color="black" />
+                                </View>
                             </Pressable>
                         </View>
                     </View>
