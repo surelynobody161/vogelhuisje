@@ -17,7 +17,7 @@ export default function NavBar(): JSX.Element {
     return (
         <View style={styles.navBar}>
             {/* Home → /mijnhuisjes */}
-            <TouchableOpacity onPress={() => handleNavigation('home', '/mijnHuisjes')}>
+            <TouchableOpacity onPress={() => handleNavigation('home', '/MijnHuisjes')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
@@ -31,7 +31,7 @@ export default function NavBar(): JSX.Element {
             </TouchableOpacity>
 
             {/* Stream → /stream */}
-            <TouchableOpacity onPress={() => handleNavigation('stream', '/stream')}>
+            <TouchableOpacity onPress={() => handleNavigation('stream', '/Stream')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
@@ -45,7 +45,7 @@ export default function NavBar(): JSX.Element {
             </TouchableOpacity>
 
             {/* Shop → /shop */}
-            <TouchableOpacity onPress={() => handleNavigation('search', '/shop')}>
+            <TouchableOpacity onPress={() => handleNavigation('search', '/Shop')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
@@ -59,7 +59,7 @@ export default function NavBar(): JSX.Element {
             </TouchableOpacity>
 
             {/* Profile → /profile */}
-            <TouchableOpacity onPress={() => handleNavigation('setting', '/profile')}>
+            <TouchableOpacity onPress={() => handleNavigation('setting', '/Profile')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
