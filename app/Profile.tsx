@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { View, Image, TouchableOpacity, Switch, ScrollView, SafeAreaView, Alert, TextInput, StyleSheet, Text } from "react-native"
-import { Picker } from "@react-native-picker/picker"
 import { Ionicons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack"
@@ -19,7 +18,7 @@ export default function ProfielScherm() {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
     const [cameraAan, setCameraAan] = useState(true)
     const [notificatiesAan, setNotificatiesAan] = useState(false)
-    const [clipLengte, setClipLengte] = useState("30") // Default naar 30 seconden
+    const [clipLengte, setClipLengte] = useState("30")
     const [profielfoto, setProfielfoto] = useState("https://cdn.pixabay.com/photo/2017/02/07/16/47/kingfisher-2046453_640.jpg")
     const [naam, setNaam] = useState("Birdney")
     const [email, setEmail] = useState("britney@email.com")
@@ -32,7 +31,7 @@ export default function ProfielScherm() {
                     const data = JSON.parse(saved)
                     setCameraAan(data.cameraAan)
                     setNotificatiesAan(data.notificatiesAan)
-                    setClipLengte(data.clipLengte || "30") // Fallback naar 30 sec
+                    setClipLengte(data.clipLengte || "30")
                     setProfielfoto(data.profielfoto)
                     setNaam(data.naam)
                     setEmail(data.email)
@@ -103,7 +102,6 @@ export default function ProfielScherm() {
         )
     }
 
-    // Functie om clip lengte label te krijgen
     const getClipLengteLabel = (value: string) => {
         switch(value) {
             case "10": return "10 seconden"
@@ -111,6 +109,33 @@ export default function ProfielScherm() {
             case "50": return "50 seconden"
             default: return "30 seconden"
         }
+    }
+
+    // Custom dropdown functie
+    const showClipLengteOptions = () => {
+        Alert.alert(
+            "Kies Clip Lengte",
+            "Selecteer de gewenste clip lengte:",
+            [
+                {
+                    text: "10 seconden",
+                    onPress: () => setClipLengte("10")
+                },
+                {
+                    text: "30 seconden",
+                    onPress: () => setClipLengte("30")
+                },
+                {
+                    text: "50 seconden",
+                    onPress: () => setClipLengte("50")
+                },
+                {
+                    text: "Annuleren",
+                    style: "cancel"
+                }
+            ],
+            { cancelable: true }
+        )
     }
 
     return (
@@ -175,31 +200,18 @@ export default function ProfielScherm() {
                         <Switch value={notificatiesAan} onValueChange={setNotificatiesAan} trackColor={{ false: "#d3d3d3", true: "#006e41" }} thumbColor="#ffffff" />
                     </View>
 
-                    {/* Verbeterde Clip Lengte Dropdown */}
+                    {/* Custom Clip Lengte Dropdown - Veel mooier! */}
                     <View style={styles.settingRow}>
                         <Text style={styles.settingLabel}>Clip Lengte</Text>
-                        <View style={styles.pickerContainer}>
-                            <Picker
-                                selectedValue={clipLengte}
-                                onValueChange={(itemValue) => {
-                                    setClipLengte(itemValue)
-                                    console.log("Clip lengte gewijzigd naar:", itemValue) // Voor debugging
-                                }}
-                                style={styles.picker}
-                                dropdownIconColor="#017F56"
-                            >
-                                <Picker.Item label="10 seconden" value="10" />
-                                <Picker.Item label="30 seconden" value="30" />
-                                <Picker.Item label="50 seconden" value="50" />
-                            </Picker>
-                        </View>
-                    </View>
-
-                    {/* Toon huidige selectie */}
-                    <View style={styles.currentSelectionRow}>
-                        <Text style={styles.currentSelectionText}>
-                            Huidige selectie: {getClipLengteLabel(clipLengte)}
-                        </Text>
+                        <TouchableOpacity
+                            style={styles.customDropdown}
+                            onPress={showClipLengteOptions}
+                        >
+                            <Text style={styles.dropdownText}>
+                                {getClipLengteLabel(clipLengte)}
+                            </Text>
+                            <Ionicons name="chevron-down" size={16} color="#017F56" />
+                        </TouchableOpacity>
                     </View>
                 </View>
 
@@ -316,29 +328,23 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: "#333"
     },
-    // Verbeterde picker styles
-    pickerContainer: {
+    // Custom dropdown styles - Veel mooier dan Picker!
+    customDropdown: {
+        flexDirection: "row",
+        alignItems: "center",
         backgroundColor: "#f0f0f0",
+        paddingHorizontal: 12,
+        paddingVertical: 10,
         borderRadius: 8,
         borderWidth: 1,
-        borderColor: "#ddd",
-        overflow: "hidden"
+        borderColor: "#017F56",
+        minWidth: 130
     },
-    picker: {
-        height: 50,
-        width: 160,
-        backgroundColor: "transparent"
-    },
-    // Nieuwe style voor huidige selectie
-    currentSelectionRow: {
-        marginTop: 5,
-        marginBottom: 10
-    },
-    currentSelectionText: {
-        fontSize: 12,
-        color: "#017F56",
-        fontStyle: "italic",
-        textAlign: "center"
+    dropdownText: {
+        fontSize: 14,
+        color: "#333",
+        marginRight: 8,
+        flex: 1
     },
     saveButton: {
         backgroundColor: "#017F56",
