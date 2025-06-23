@@ -15,9 +15,10 @@ import {
 } from "react-native";
 
 type RootStackParamList = {
-    Login: undefined;
+    login: undefined;
     Register: undefined;
     Profile: undefined;
+    Stream: undefined;  // Toegevoegd voor de Stream page
 };
 
 export default function Login() {
@@ -40,7 +41,7 @@ export default function Login() {
         try {
             await new Promise((resolve) => setTimeout(resolve, 1000))
             Alert.alert("Succes", "Inloggen gelukt!")
-            navigation.navigate("Profile")
+            navigation.navigate("Stream") // Navigeert naar Stream page
         } catch (error) {
             Alert.alert("Fout", "Inloggen mislukt")
         } finally {

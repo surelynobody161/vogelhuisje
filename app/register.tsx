@@ -47,7 +47,7 @@ export default function Register() {
         try {
             await new Promise((resolve) => setTimeout(resolve, 1000))
             Alert.alert("Succes", "Account succesvol aangemaakt!")
-            navigation.navigate("Login") // 🔁 Ga terug naar login na registratie
+            navigation.navigate("Login") // Ga terug naar login na registratie
         } catch (error) {
             Alert.alert("Fout", "Registratie mislukt")
         } finally {

@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { TextSizeProvider } from "./contexts/TextSizeContext"
 
-import Login from "./app/login"
+import Login from "./app/Login"
 import Register from "./app/register"
 import ProfielScherm from "./app/profile"
 
