@@ -5,7 +5,7 @@ import { TextSizeProvider } from "./contexts/TextSizeContext"
 
 import Login from "./app/Login"
 import Register from "./app/register"
-import ProfielScherm from "./app/profile"
+import ProfielScherm from "./app/Profile"
 
 const Stack = createNativeStackNavigator()
 

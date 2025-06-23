@@ -12,15 +12,16 @@ type RootStackParamList = {
     Recorder: undefined
     Profile: undefined
     Intro: undefined
+    login: undefined
 }
 
 export default function ProfielScherm() {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
     const [cameraAan, setCameraAan] = useState(true)
     const [notificatiesAan, setNotificatiesAan] = useState(false)
-    const [clipLengte, setClipLengte] = useState("30")
+    const [clipLengte, setClipLengte] = useState("30") // Default naar 30 seconden
     const [profielfoto, setProfielfoto] = useState("https://cdn.pixabay.com/photo/2017/02/07/16/47/kingfisher-2046453_640.jpg")
-    const [naam, setNaam] = useState("Britney Krabbendam")
+    const [naam, setNaam] = useState("Birdney")
     const [email, setEmail] = useState("britney@email.com")
 
     useEffect(() => {
@@ -31,7 +32,7 @@ export default function ProfielScherm() {
                     const data = JSON.parse(saved)
                     setCameraAan(data.cameraAan)
                     setNotificatiesAan(data.notificatiesAan)
-                    setClipLengte(data.clipLengte)
+                    setClipLengte(data.clipLengte || "30") // Fallback naar 30 sec
                     setProfielfoto(data.profielfoto)
                     setNaam(data.naam)
                     setEmail(data.email)
@@ -69,15 +70,56 @@ export default function ProfielScherm() {
         }
         try {
             await AsyncStorage.setItem("profileSettings", JSON.stringify(data))
-            Alert.alert("Opgeslagen", "Je instellingen zijn opgeslagen.")
+            Alert.alert("Opgeslagen", `Je instellingen zijn opgeslagen.\nClip lengte: ${clipLengte} seconden`)
         } catch (e) {
             Alert.alert("Fout", "Kon instellingen niet opslaan.")
         }
     }
 
+    const handleLogout = () => {
+        Alert.alert(
+            "Uitloggen",
+            "Weet je zeker dat je wilt uitloggen?",
+            [
+                {
+                    text: "Annuleren",
+                    style: "cancel"
+                },
+                {
+                    text: "Uitloggen",
+                    style: "destructive",
+                    onPress: async () => {
+                        try {
+                            navigation.reset({
+                                index: 0,
+                                routes: [{ name: 'login' }],
+                            })
+                        } catch (error) {
+                            Alert.alert("Fout", "Er ging iets mis bij het uitloggen.")
+                        }
+                    }
+                }
+            ]
+        )
+    }
+
+    // Functie om clip lengte label te krijgen
+    const getClipLengteLabel = (value: string) => {
+        switch(value) {
+            case "10": return "10 seconden"
+            case "30": return "30 seconden"
+            case "50": return "50 seconden"
+            default: return "30 seconden"
+        }
+    }
+
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.content}>
+            <ScrollView
+                style={styles.content}
+                contentContainerStyle={styles.scrollContent}
+                showsVerticalScrollIndicator={false}
+            >
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                         <Ionicons name="chevron-back" size={24} color="#B9FFBC" />
@@ -132,19 +174,42 @@ export default function ProfielScherm() {
                         <Text style={styles.settingLabel}>Notificaties</Text>
                         <Switch value={notificatiesAan} onValueChange={setNotificatiesAan} trackColor={{ false: "#d3d3d3", true: "#006e41" }} thumbColor="#ffffff" />
                     </View>
+
+                    {/* Verbeterde Clip Lengte Dropdown */}
                     <View style={styles.settingRow}>
                         <Text style={styles.settingLabel}>Clip Lengte</Text>
-                        <Picker selectedValue={clipLengte} onValueChange={setClipLengte} style={styles.picker}>
-                            <Picker.Item label="30 seconden" value="30" />
-                            <Picker.Item label="1 minuut" value="60" />
-                            <Picker.Item label="2 minuten" value="120" />
-                            <Picker.Item label="Langer" value="long" />
-                        </Picker>
+                        <View style={styles.pickerContainer}>
+                            <Picker
+                                selectedValue={clipLengte}
+                                onValueChange={(itemValue) => {
+                                    setClipLengte(itemValue)
+                                    console.log("Clip lengte gewijzigd naar:", itemValue) // Voor debugging
+                                }}
+                                style={styles.picker}
+                                dropdownIconColor="#017F56"
+                            >
+                                <Picker.Item label="10 seconden" value="10" />
+                                <Picker.Item label="30 seconden" value="30" />
+                                <Picker.Item label="50 seconden" value="50" />
+                            </Picker>
+                        </View>
+                    </View>
+
+                    {/* Toon huidige selectie */}
+                    <View style={styles.currentSelectionRow}>
+                        <Text style={styles.currentSelectionText}>
+                            Huidige selectie: {getClipLengteLabel(clipLengte)}
+                        </Text>
                     </View>
                 </View>
 
                 <TouchableOpacity style={styles.saveButton} onPress={slaInstellingenOp}>
                     <Text style={styles.saveButtonText}>Instellingen Opslaan</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+                    <Ionicons name="log-out-outline" size={20} color="#fff" style={styles.logoutIcon} />
+                    <Text style={styles.logoutButtonText}>Uitloggen</Text>
                 </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
@@ -152,8 +217,16 @@ export default function ProfielScherm() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: "white" },
-    content: { flex: 1 },
+    container: {
+        flex: 1,
+        backgroundColor: "white"
+    },
+    content: {
+        flex: 1
+    },
+    scrollContent: {
+        paddingBottom: 0,
+    },
     header: {
         backgroundColor: "#017F56",
         paddingVertical: 30,
@@ -243,9 +316,34 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: "#333"
     },
+    // Verbeterde picker styles
+    pickerContainer: {
+        backgroundColor: "#f0f0f0",
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: "#ddd",
+        overflow: "hidden"
+    },
+    picker: {
+        height: 50,
+        width: 160,
+        backgroundColor: "transparent"
+    },
+    // Nieuwe style voor huidige selectie
+    currentSelectionRow: {
+        marginTop: 5,
+        marginBottom: 10
+    },
+    currentSelectionText: {
+        fontSize: 12,
+        color: "#017F56",
+        fontStyle: "italic",
+        textAlign: "center"
+    },
     saveButton: {
         backgroundColor: "#017F56",
         margin: 15,
+        marginBottom: 15,
         paddingVertical: 12,
         borderRadius: 5,
         alignItems: "center"
@@ -262,10 +360,22 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold"
     },
-    picker: {
-        height: 40,
-        width: 160,
-        backgroundColor: "#f0f0f0",
-        borderRadius: 8
+    logoutButton: {
+        backgroundColor: "#dc3545",
+        margin: 15,
+        marginBottom: 20,
+        paddingVertical: 12,
+        borderRadius: 5,
+        alignItems: "center",
+        flexDirection: "row",
+        justifyContent: "center"
     },
+    logoutButtonText: {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: 16
+    },
+    logoutIcon: {
+        marginRight: 8
+    }
 })
