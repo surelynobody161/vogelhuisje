@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import {
@@ -13,6 +14,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import api from './api';
 
 type RootStackParamList = {
     Login: undefined;
@@ -24,13 +26,15 @@ export default function Login() {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>()
 
     const [formData, setFormData] = useState({
-        emailOrPhone: "",
+        email: "",
         password: "",
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const handleLogin = async () => {
-        if (!formData.emailOrPhone || !formData.password) {
+        const { email, password } = formData;
+
+        if (!email || !password) {
             Alert.alert("Fout", "Vul alle velden in")
             return
         }
@@ -38,13 +42,27 @@ export default function Login() {
         setIsSubmitting(true)
 
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1000))
-            Alert.alert("Succes", "Inloggen gelukt!")
-            navigation.navigate("Profile")
+            const response = await api.login({
+                email,
+                password
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Opslaan token en user id in AsyncStorage
+                await AsyncStorage.setItem('userToken', data.token);
+                await AsyncStorage.setItem('userId', String(data.user_id));
+
+                Alert.alert("Succes", "Inloggen gelukt!");
+                navigation.navigate("Profile");
+            } else {
+                Alert.alert("Fout", data.error || "Inloggen mislukt");
+            }
         } catch (error) {
-            Alert.alert("Fout", "Inloggen mislukt")
+            Alert.alert("Fout", "Er is een netwerkfout opgetreden");
         } finally {
-            setIsSubmitting(false)
+            setIsSubmitting(false);
         }
     }
 
@@ -66,10 +84,10 @@ export default function Login() {
                     <View style={styles.loginForm}>
                         <TextInput
                             style={styles.textInput}
-                            placeholder="E-mailadres of telefoonnummer"
+                            placeholder="E-mailadres"
                             placeholderTextColor="#666"
-                            value={formData.emailOrPhone}
-                            onChangeText={(text) => setFormData({ ...formData, emailOrPhone: text })}
+                            value={formData.email}
+                            onChangeText={(text) => setFormData({ ...formData, email: text })}
                             keyboardType="email-address"
                             autoCapitalize="none"
                             autoCorrect={false}
@@ -129,7 +147,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     buttonDisabled: { opacity: 0.6 },
-    loginButtonText: { color: "white" },
+    loginButtonText: { color: "white", fontSize: 16 },
     registerText: {
         textAlign: "center",
         color: "#333",

@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import {
@@ -13,6 +14,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import api from './api';
 
 type RootStackParamList = {
     Login: undefined;
@@ -21,23 +23,22 @@ type RootStackParamList = {
 export default function Register() {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>()
     const [formData, setFormData] = useState({
+        name: "",
         email: "",
-        phone: "",
         password: "",
         confirmPassword: "",
     })
-    const [registerMode, setRegisterMode] = useState("email")
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const handleRegister = async () => {
-        const contactValue = registerMode === "email" ? formData.email : formData.phone
+        const { name, email, password, confirmPassword } = formData;
 
-        if (!contactValue || !formData.password || !formData.confirmPassword) {
+        if (!name || !email || !password || !confirmPassword) {
             Alert.alert("Fout", "Vul alle velden in")
             return
         }
 
-        if (formData.password !== formData.confirmPassword) {
+        if (password !== confirmPassword) {
             Alert.alert("Fout", "Wachtwoorden komen niet overeen")
             return
         }
@@ -45,13 +46,29 @@ export default function Register() {
         setIsSubmitting(true)
 
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1000))
-            Alert.alert("Succes", "Account succesvol aangemaakt!")
-            navigation.navigate("Login") // 🔁 Ga terug naar login na registratie
+            const response = await api.register({
+                name,
+                email,
+                password
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Opslaan user id als die wordt teruggestuurd
+                if (data.user_id) {
+                    await AsyncStorage.setItem('userId', String(data.user_id));
+                }
+
+                Alert.alert("Succes", "Account succesvol aangemaakt!");
+                navigation.navigate("Login");
+            } else {
+                Alert.alert("Fout", data.error || "Registratie mislukt");
+            }
         } catch (error) {
-            Alert.alert("Fout", "Registratie mislukt")
+            Alert.alert("Fout", "Er is een netwerkfout opgetreden");
         } finally {
-            setIsSubmitting(false)
+            setIsSubmitting(false);
         }
     }
 
@@ -67,29 +84,24 @@ export default function Register() {
                         <Text style={styles.formTitle}>Registreren</Text>
                     </View>
                     <View style={styles.registerForm}>
-                        {registerMode === "email" ? (
-                            <TextInput
-                                style={styles.textInput}
-                                placeholder="E-mailadres"
-                                placeholderTextColor="#666"
-                                value={formData.email}
-                                onChangeText={(text) => setFormData({ ...formData, email: text })}
-                                keyboardType="email-address"
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                            />
-                        ) : (
-                            <TextInput
-                                style={styles.textInput}
-                                placeholder="Telefoonnummer"
-                                placeholderTextColor="#666"
-                                value={formData.phone}
-                                onChangeText={(text) => setFormData({ ...formData, phone: text })}
-                                keyboardType="phone-pad"
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                            />
-                        )}
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder="Volledige naam"
+                            placeholderTextColor="#666"
+                            value={formData.name}
+                            onChangeText={(text) => setFormData({ ...formData, name: text })}
+                            autoCapitalize="words"
+                        />
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder="E-mailadres"
+                            placeholderTextColor="#666"
+                            value={formData.email}
+                            onChangeText={(text) => setFormData({ ...formData, email: text })}
+                            keyboardType="email-address"
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                        />
                         <TextInput
                             style={styles.textInput}
                             placeholder="Wachtwoord"

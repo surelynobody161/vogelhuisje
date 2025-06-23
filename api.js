@@ -4,10 +4,12 @@ const BASE_URL = 'http://145.24.223.199';
 
 const fetchWithAuth = async (url, options = {}) => {
     const token = await AsyncStorage.getItem('userToken');
+    const userId = await AsyncStorage.getItem('userId');
 
     const headers = {
         'Content-Type': 'application/json',
         ...(token && { Authorization: `Bearer ${token}` }),
+        ...(userId && { 'X-User-ID': userId }),
         ...options.headers,
     };
 
@@ -32,14 +34,28 @@ export default {
             body: JSON.stringify(data),
         }),
 
-    getProfile: () =>
-        fetchWithAuth('/users/me', {
+    getProfile: async () => {
+        const userId = await AsyncStorage.getItem('userId');
+        return fetchWithAuth(`/users/${userId}`, {
+            method: 'GET',
+        });
+    },
+
+    updateProfile: async (data) => {
+        const userId = await AsyncStorage.getItem('userId');
+        return fetchWithAuth(`/users/${userId}`, {
+            method: 'PUT',
+            body: JSON.stringify(data),
+        });
+    },
+
+    getAllUsers: () =>
+        fetchWithAuth('/users', {
             method: 'GET',
         }),
 
-    updateProfile: (data) =>
-        fetchWithAuth('/users/me', {
-            method: 'PUT',
-            body: JSON.stringify(data),
+    getUserById: (id) =>
+        fetchWithAuth(`/users/${id}`, {
+            method: 'GET',
         }),
 };
