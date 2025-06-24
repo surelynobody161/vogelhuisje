@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity, SafeAreaView, StatusBar } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 const streams = [
     {
@@ -29,7 +30,9 @@ const streams = [
     },
 ];
 
-export default function StreamList({ navigation }: any) {
+export default function StreamList() {
+    const router = useRouter();
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="light-content" backgroundColor="#00804A" />
@@ -46,7 +49,7 @@ export default function StreamList({ navigation }: any) {
                                 <Text style={styles.placeholderText}>[Image Placeholder]</Text>
                                 <TouchableOpacity
                                     style={styles.playButton}
-                                    onPress={() => navigation.navigate("Stream", { streamId: stream.id })}
+                                    onPress={() => router.push(`/Stream?streamId=${stream.id}`)}
                                 >
                                     <Ionicons name="play-circle" size={50} color="white" />
                                 </TouchableOpacity>
@@ -55,7 +58,7 @@ export default function StreamList({ navigation }: any) {
                                 <Text style={styles.streamTitle}>{stream.title}</Text>
                                 <TouchableOpacity
                                     style={styles.goToButton}
-                                    onPress={() => navigation.navigate("RecordingScreen", { streamId: stream.id })}
+                                    onPress={() => router.push(`/Recordingscreen?streamId=${stream.id}`)}
                                 >
                                     <Text style={styles.goToButtonText}>Go to Recordings</Text>
                                 </TouchableOpacity>
