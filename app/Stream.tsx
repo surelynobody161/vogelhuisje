@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'r
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import NavBar from './NavBar';
+import LiveStream from "../components/LiveStream";
 
 export default function Stream() {
     const [note, setNote] = useState('');
@@ -23,7 +24,8 @@ export default function Stream() {
 
                 {/* Stream Section */}
                 <View style={styles.streamContainer}>
-                    <Text style={styles.streamPlaceholder}>[Stream Playing Here]</Text>
+                    <Text style={styles.streamPlaceholder}></Text>
+                    <LiveStream/>
                 </View>
 
                 {/* Notes Section */}
