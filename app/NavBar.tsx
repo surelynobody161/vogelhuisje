@@ -1,15 +1,23 @@
-import React, {JSX, useState } from 'react'
+import React, { JSX } from 'react'
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native'
-import { useRouter } from 'expo-router'
+import { useRouter, usePathname } from 'expo-router'
 
 type PageType = 'home' | 'stream' | 'search' | 'setting'
 
-export default function NavBar(): JSX.Element {
-    const [activePage, setActivePage] = useState<PageType>('home')
-    const router = useRouter()
+function getActivePage(pathname: string): PageType {
+    if (pathname.toLowerCase().startsWith('/mijnhuisjes')) return 'home'
+    if (pathname.toLowerCase().startsWith('/stream')) return 'stream'
+    if (pathname.toLowerCase().startsWith('/shop')) return 'search'
+    if (pathname.toLowerCase().startsWith('/profile')) return 'setting'
+    return 'home'
+}
 
-    const handleNavigation = (page: PageType, route: string): void => {
-        setActivePage(page)
+export default function NavBar(): JSX.Element {
+    const router = useRouter()
+    const pathname = usePathname()
+    const activePage = getActivePage(pathname)
+
+    const handleNavigation = (route: string): void => {
         router.push(route as any)
         console.log(`Navigating to: ${route}`)
     }
@@ -17,7 +25,7 @@ export default function NavBar(): JSX.Element {
     return (
         <View style={styles.navBar}>
             {/* Home → /mijnhuisjes */}
-            <TouchableOpacity onPress={() => handleNavigation('home', '/MijnHuisjes')}>
+            <TouchableOpacity onPress={() => handleNavigation('/MijnHuisjes')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
@@ -31,7 +39,7 @@ export default function NavBar(): JSX.Element {
             </TouchableOpacity>
 
             {/* Stream → /stream */}
-            <TouchableOpacity onPress={() => handleNavigation('stream', '/Stream')}>
+            <TouchableOpacity onPress={() => handleNavigation('/Stream')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
@@ -45,7 +53,7 @@ export default function NavBar(): JSX.Element {
             </TouchableOpacity>
 
             {/* Shop → /shop */}
-            <TouchableOpacity onPress={() => handleNavigation('search', '/Shop')}>
+            <TouchableOpacity onPress={() => handleNavigation('/Shop')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
@@ -59,7 +67,7 @@ export default function NavBar(): JSX.Element {
             </TouchableOpacity>
 
             {/* Profile → /profile */}
-            <TouchableOpacity onPress={() => handleNavigation('setting', '/Profile')}>
+            <TouchableOpacity onPress={() => handleNavigation('/Profile')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
