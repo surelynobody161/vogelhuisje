@@ -16,7 +16,7 @@ import { useNavigation } from "@react-navigation/native"
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import * as ImagePicker from "expo-image-picker"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import NavBar from "./NavBar"               // ⬅️ nieuw
+import NavBar from "./NavBar"
 
 type RootStackParamList = {
     Home: undefined
@@ -31,13 +31,10 @@ export default function ProfielScherm() {
     const [cameraAan, setCameraAan] = useState(true)
     const [notificatiesAan, setNotificatiesAan] = useState(false)
     const [clipLengte, setClipLengte] = useState("30")
-    const [profielfoto, setProfielfoto] = useState(
-        "https://cdn.pixabay.com/photo/2017/02/07/16/47/kingfisher-2046453_640.jpg"
-    )
+    const [profielfoto, setProfielfoto] = useState("https://cdn.pixabay.com/photo/2017/02/07/16/47/kingfisher-2046453_640.jpg")
     const [naam, setNaam] = useState("Birdney")
     const [email, setEmail] = useState("britney@email.com")
 
-    /* ----------------------------- LOAD / SAVE ----------------------------- */
     useEffect(() => {
         const loadSettings = async () => {
             try {
@@ -52,14 +49,28 @@ export default function ProfielScherm() {
                     setEmail(data.email)
                 }
             } catch {
-                /* ignore */
+                // ignore
             }
         }
         loadSettings()
     }, [])
 
     const slaInstellingenOp = async () => {
+        const isValidEmail = (email: string) => /\S+@\S+\.\S+/.test(email)
+        const isValidName = (naam: string) => naam.trim().length >= 2
+
+        if (!isValidName(naam)) {
+            Alert.alert("Fout", "Voer een geldige naam in (minimaal 2 tekens).")
+            return
+        }
+
+        if (!isValidEmail(email)) {
+            Alert.alert("Fout", "Voer een geldig e-mailadres in.")
+            return
+        }
+
         const data = { cameraAan, notificatiesAan, clipLengte, profielfoto, naam, email }
+
         try {
             await AsyncStorage.setItem("profileSettings", JSON.stringify(data))
             Alert.alert("Opgeslagen", "Je instellingen zijn opgeslagen.")
@@ -68,7 +79,6 @@ export default function ProfielScherm() {
         }
     }
 
-    /* ----------------------------- FOTO & LOGOUT --------------------------- */
     const kiesFoto = async () => {
         const toestemming = await ImagePicker.requestMediaLibraryPermissionsAsync()
         if (toestemming.status !== "granted") {
@@ -99,46 +109,32 @@ export default function ProfielScherm() {
         ])
     }
 
-    /* ---------------------------- CLIPLENGTE UI ---------------------------- */
     const getClipLengteLabel = (value: string) => {
         switch (value) {
-            case "10":
-                return "10 seconden"
-            case "30":
-                return "30 seconden"
-            case "50":
-                return "50 seconden"
-            default:
-                return "30 seconden"
+            case "10": return "10 seconden"
+            case "30": return "30 seconden"
+            case "50": return "50 seconden"
+            default: return "30 seconden"
         }
     }
 
     const showClipLengteOptions = () => {
-        Alert.alert(
-            "Kies Clip Lengte",
-            "Selecteer de gewenste clip lengte:",
-            [
-                { text: "10 seconden", onPress: () => setClipLengte("10") },
-                { text: "30 seconden", onPress: () => setClipLengte("30") },
-                { text: "50 seconden", onPress: () => setClipLengte("50") },
-                { text: "Annuleren", style: "cancel" },
-            ],
-            { cancelable: true }
-        )
+        Alert.alert("Kies Clip Lengte", "Selecteer de gewenste clip lengte:", [
+            { text: "10 seconden", onPress: () => setClipLengte("10") },
+            { text: "30 seconden", onPress: () => setClipLengte("30") },
+            { text: "50 seconden", onPress: () => setClipLengte("50") },
+            { text: "Annuleren", style: "cancel" },
+        ])
     }
-
-    /* ---------------------------------------------------------------------- */
 
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.container}>
-                {/* ----- Scrollbare content ----- */}
                 <ScrollView
                     style={styles.content}
                     contentContainerStyle={styles.scrollContent}
                     showsVerticalScrollIndicator={false}
                 >
-                    {/* Header */}
                     <View style={styles.header}>
                         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                             <Ionicons name="chevron-back" size={24} color="#B9FFBC" />
@@ -147,7 +143,6 @@ export default function ProfielScherm() {
                         <View style={{ width: 40 }} />
                     </View>
 
-                    {/* Profielsectie */}
                     <View style={styles.profileSection}>
                         <Image source={{ uri: profielfoto }} style={styles.profileImage} />
                         <Text style={styles.profileName}>{naam || "Gebruiker"}</Text>
@@ -156,7 +151,6 @@ export default function ProfielScherm() {
                         </TouchableOpacity>
                     </View>
 
-                    {/* Persoonlijke info */}
                     <View style={styles.section}>
                         <Text style={styles.sectionTitle}>Persoonlijke Info</Text>
                         <View style={styles.infoRow}>
@@ -185,7 +179,6 @@ export default function ProfielScherm() {
                         <Text style={styles.startGuideButtonText}>Start Gids</Text>
                     </TouchableOpacity>
 
-                    {/* Instellingen */}
                     <View style={styles.section}>
                         <Text style={styles.sectionTitle}>Instellingen</Text>
                         <View style={styles.settingRow}>
@@ -206,8 +199,6 @@ export default function ProfielScherm() {
                                 thumbColor="#ffffff"
                             />
                         </View>
-
-                        {/* Custom dropdown voor clip lengte */}
                         <View style={styles.settingRow}>
                             <Text style={styles.settingLabel}>Clip Lengte</Text>
                             <TouchableOpacity style={styles.customDropdown} onPress={showClipLengteOptions}>
@@ -217,7 +208,6 @@ export default function ProfielScherm() {
                         </View>
                     </View>
 
-                    {/* Opslaan & Uitloggen */}
                     <TouchableOpacity style={styles.saveButton} onPress={slaInstellingenOp}>
                         <Text style={styles.saveButtonText}>Instellingen Opslaan</Text>
                     </TouchableOpacity>
@@ -228,20 +218,17 @@ export default function ProfielScherm() {
                     </TouchableOpacity>
                 </ScrollView>
 
-                {/* ----- NavBar onderaan ----- */}
                 <NavBar />
             </View>
         </SafeAreaView>
     )
 }
 
-/* ------------------------------ STYLES ------------------------------ */
 const styles = StyleSheet.create({
     safeArea: { flex: 1, backgroundColor: "#fff" },
     container: { flex: 1 },
     content: { flex: 1 },
     scrollContent: { paddingBottom: 20 },
-
     header: {
         backgroundColor: "#017F56",
         paddingVertical: 30,
@@ -265,7 +252,6 @@ const styles = StyleSheet.create({
         textAlign: "center",
         flex: 1,
     },
-
     profileSection: { alignItems: "center", paddingVertical: 20 },
     profileImage: {
         width: 100,
@@ -282,7 +268,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     saveButtonText: { color: "white", fontWeight: "bold", fontSize: 16 },
-
     section: { backgroundColor: "white", margin: 15, borderRadius: 8, padding: 15 },
     sectionTitle: { fontSize: 16, fontWeight: "bold", marginBottom: 15 },
     infoRow: { flexDirection: "row", alignItems: "center", marginBottom: 12 },
@@ -294,7 +279,6 @@ const styles = StyleSheet.create({
         flex: 2,
         color: "#555",
     },
-
     settingRow: {
         flexDirection: "row",
         justifyContent: "space-between",
@@ -314,7 +298,6 @@ const styles = StyleSheet.create({
         minWidth: 130,
     },
     dropdownText: { fontSize: 14, color: "#333", marginRight: 8, flex: 1 },
-
     saveButton: {
         backgroundColor: "#017F56",
         margin: 15,
@@ -330,7 +313,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     startGuideButtonText: { color: "#fff", fontSize: 16, fontWeight: "bold" },
-
     logoutButton: {
         backgroundColor: "#dc3545",
         margin: 15,
