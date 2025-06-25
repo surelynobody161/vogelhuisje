@@ -1,169 +1,47 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useState } from "react";
-import {
-    Alert,
-    KeyboardAvoidingView,
-    Platform,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-} from "react-native";
-import api from './api';
+import React, { useState } from 'react';
+import { Button, Text, TextInput, View } from 'react-native';
 
-type RootStackParamList = {
-    Login: undefined;
-    Register: undefined;
-    Profile: undefined;
-};
+export default function Login({ navigation }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-export default function Login() {
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>()
-
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-    })
-    const [isSubmitting, setIsSubmitting] = useState(false)
-
-    const handleLogin = async () => {
-        const { email, password } = formData;
-
-        if (!email || !password) {
-            Alert.alert("Fout", "Vul alle velden in")
-            return
-        }
-
-        setIsSubmitting(true)
-
+    async function login() {
         try {
-            const response = await api.login({
-                email,
-                password
+            const response = await fetch('http://145.24.223.199/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
             });
 
             const data = await response.json();
 
-            if (response.ok) {
-                // Opslaan token en user id in AsyncStorage
-                await AsyncStorage.setItem('userToken', data.token);
-                await AsyncStorage.setItem('userId', String(data.user_id));
-
-                Alert.alert("Succes", "Inloggen gelukt!");
-                navigation.navigate("Profile");
-            } else {
-                Alert.alert("Fout", data.error || "Inloggen mislukt");
+            if (!response.ok) {
+                setError(data.error || 'Login mislukt');
+                return;
             }
-        } catch (error) {
-            Alert.alert("Fout", "Er is een netwerkfout opgetreden");
-        } finally {
-            setIsSubmitting(false);
+
+            await AsyncStorage.setItem('token', data.token);
+            await AsyncStorage.setItem('user_id', data.user_id.toString());
+
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Home' }],
+            });
+        } catch (e) {
+            setError('Er is een fout opgetreden');
+            console.error(e);
         }
     }
 
-    const handleRegister = () => {
-        navigation.navigate("Register")
-    }
-
     return (
-        <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="light-content" backgroundColor="#017F56" />
-            <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    <View style={styles.greenHeader}>
-                        <Text style={styles.greenHeaderTitle}>Inloggen</Text>
-                    </View>
-                    <View style={styles.titleWrapper}>
-                        <Text style={styles.formTitle}>Inloggen</Text>
-                    </View>
-                    <View style={styles.loginForm}>
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder="E-mailadres"
-                            placeholderTextColor="#666"
-                            value={formData.email}
-                            onChangeText={(text) => setFormData({ ...formData, email: text })}
-                            keyboardType="email-address"
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                        />
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder="Wachtwoord"
-                            placeholderTextColor="#666"
-                            value={formData.password}
-                            onChangeText={(text) => setFormData({ ...formData, password: text })}
-                            secureTextEntry
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                        />
-                        <TouchableOpacity
-                            style={[styles.loginButton, isSubmitting && styles.buttonDisabled]}
-                            onPress={handleLogin}
-                            disabled={isSubmitting}
-                        >
-                            <Text style={styles.loginButtonText}>
-                                {isSubmitting ? "Bezig met inloggen..." : "Log in!"}
-                            </Text>
-                        </TouchableOpacity>
-
-                        <Text style={styles.registerText}>Heeft u nog geen account?</Text>
-                        <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
-                            <Text style={styles.registerButtonText}>Aanmelden</Text>
-                        </TouchableOpacity>
-                    </View>
-                </ScrollView>
-            </KeyboardAvoidingView>
-        </SafeAreaView>
-    )
+        <View style={{ padding: 20 }}>
+            <TextInput placeholder="Email" value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" />
+            <TextInput placeholder="Wachtwoord" secureTextEntry value={password} onChangeText={setPassword} />
+            {error ? <Text style={{ color: 'red' }}>{error}</Text> : null}
+            <Button title="Inloggen" onPress={login} />
+            <Button title="Registreren" onPress={() => navigation.navigate('Register')} />
+        </View>
+    );
 }
-
-const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: "#fff" },
-    greenHeader: { backgroundColor: "#017F56", paddingHorizontal: 20, paddingVertical: 24, alignItems: "center" },
-    greenHeaderTitle: { fontSize: 20, color: "white", fontWeight: "500" },
-    titleWrapper: { alignItems: "center", paddingTop: 16, paddingBottom: 8 },
-    formTitle: { fontSize: 24, fontWeight: "600", color: "#333", marginTop: 35 },
-    loginForm: { paddingHorizontal: 24, paddingTop: 16 },
-    textInput: {
-        backgroundColor: "#f0f0f0",
-        paddingHorizontal: 12,
-        paddingVertical: 16,
-        borderRadius: 4,
-        fontSize: 16,
-        color: "#333",
-        marginBottom: 20,
-    },
-    loginButton: {
-        backgroundColor: "#017F56",
-        paddingVertical: 16,
-        borderRadius: 8,
-        alignItems: "center",
-        marginBottom: 20,
-    },
-    buttonDisabled: { opacity: 0.6 },
-    loginButtonText: { color: "white", fontSize: 16 },
-    registerText: {
-        textAlign: "center",
-        color: "#333",
-        marginBottom: 8,
-        fontSize: 16,
-    },
-    registerButton: {
-        backgroundColor: "#e0e0e0",
-        paddingVertical: 14,
-        borderRadius: 8,
-        alignItems: "center",
-        marginBottom: 20,
-    },
-    registerButtonText: {
-        color: "#017F56",
-        fontWeight: "600",
-        fontSize: 16,
-    },
-});
