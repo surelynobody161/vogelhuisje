@@ -42,4 +42,19 @@ export default {
             method: 'PUT',
             body: JSON.stringify(data),
         }),
+
+    getShopItems: () =>
+        fetch(`${BASE_URL}/shopitems`).then(res => res.json()),
+
+    getShopItemById: (id) =>
+        fetch(`${BASE_URL}/shopitems/${id}`).then(res => res.json()),
+
+    deleteShopItem: (id) =>
+        fetchWithAuth(`/shopitems/${id}`, {
+            method: 'DELETE',
+        }),
+
+    getAvailableBirdhouses: () =>
+        fetch(`${BASE_URL}/birdhouses?_available=true`).then(res => res.json()),
 };
+
