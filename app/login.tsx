@@ -1,5 +1,6 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 import {
     Alert,
     KeyboardAvoidingView,
@@ -22,6 +23,7 @@ type RootStackParamList = {
 
 export default function Login() {
     const navigation = useNavigation<NavigationProp<RootStackParamList>>()
+    const { login } = useContext(AuthContext);
 
     const [formData, setFormData] = useState({
         emailOrPhone: "",
@@ -38,18 +40,20 @@ export default function Login() {
         setIsSubmitting(true)
 
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1000))
+            const token = await login({email: formData.emailOrPhone, password: formData.password});
+            if (!token) throw new Error('Failed to login');
             Alert.alert("Succes", "Inloggen gelukt!")
             navigation.navigate("Stream") // This navigates to Stream
         } catch (error) {
             Alert.alert("Fout", "Inloggen mislukt")
+            throw new Error(error);
         } finally {
             setIsSubmitting(false)
         }
     }
 
     const handleRegister = () => {
-        navigation.navigate("Register")
+        navigation.navigate("register")
     }
 
     return (
