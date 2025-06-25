@@ -23,12 +23,6 @@ export default function RecordingItem({ recording }: RecordingItemProps) {
                 </View>
 
                 <View style={styles.actionsContainer}>
-                    <View style={styles.textAndDeleteContainer}>
-                        <TouchableOpacity style={styles.deleteButton}>
-                            <Text style={styles.deleteButtonText}>verwijder opname</Text>
-                        </TouchableOpacity>
-                    </View>
-
                     <TouchableOpacity style={styles.playButton}>
                         <Ionicons name="play" size={24} color="white" />
                     </TouchableOpacity>
@@ -78,24 +72,7 @@ const styles = StyleSheet.create({
     actionsContainer: {
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between",
-    },
-    textAndDeleteContainer: {
-        flex: 1,
-        alignItems: "flex-start",
-    },
-    deleteButton: {
-        backgroundColor: "#B9FFBC",
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        borderRadius: 18,
-        alignSelf: "flex-start",
-    },
-    deleteButtonText: {
-        fontFamily: "Radikal-Regular",
-        color: "black",
-        fontSize: 13,
-        fontWeight: "600",
+        justifyContent: "flex-end",
     },
     playButton: {
         width: 50,

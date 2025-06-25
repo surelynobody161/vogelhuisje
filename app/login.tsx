@@ -40,7 +40,7 @@ export default function Login() {
         try {
             await new Promise((resolve) => setTimeout(resolve, 1000))
             Alert.alert("Succes", "Inloggen gelukt!")
-            navigation.navigate("Stream") // This navigates to Profile after successful login
+            navigation.navigate("Stream") // This navigates to Stream
         } catch (error) {
             Alert.alert("Fout", "Inloggen mislukt")
         } finally {

@@ -3,10 +3,13 @@ import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet } from 'r
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import NavBar from './NavBar';
+import LiveStream from "../components/LiveStream";
+import { useRouter } from 'expo-router';
 
 export default function Stream() {
     const [note, setNote] = useState('');
     const [notes, setNotes] = useState<{ text: string; timestamp: string }[]>([]);
+    const router = useRouter();
 
     const handleSaveNote = () => {
         if (note.trim()) {
@@ -19,11 +22,18 @@ export default function Stream() {
     return (
         <SafeAreaView style={styles.safeArea} edges={['bottom']}>
             <View style={styles.container}>
-                <Text style={styles.header}>Stream</Text>
+                <View style={styles.headerRow}>
+                    <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+                        <Ionicons name="chevron-back" size={28} color="#B9FFBC" />
+                    </TouchableOpacity>
+                    <Text style={styles.header}>Stream</Text>
+                    <View style={{ width: 40 }} />
+                </View>
 
                 {/* Stream Section */}
                 <View style={styles.streamContainer}>
-                    <Text style={styles.streamPlaceholder}>[Stream Playing Here]</Text>
+                    <Text style={styles.streamPlaceholder}></Text>
+                    <LiveStream/>
                 </View>
 
                 {/* Notes Section */}
@@ -61,15 +71,30 @@ export default function Stream() {
 const styles = StyleSheet.create({
     safeArea: { flex: 1, backgroundColor: '#fff' },
     container: { flex: 1, backgroundColor: '#fff'},
+    headerRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#00794D',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        paddingVertical: 20,
+        paddingHorizontal: 10,
+        justifyContent: 'space-between',
+    },
+    backButton: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: '#015C40',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     header: {
         fontSize: 22,
         fontWeight: 'bold',
         textAlign: 'center',
         color: 'white',
-        backgroundColor: '#00794D',
-        paddingVertical: 20,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        flex: 1,
     },
     streamContainer: {
         height: 200,
