@@ -23,6 +23,9 @@ export default function Detail() {
         <View style={styles.container}>
             {/* Top section */}
             <View style={styles.topSection}>
+                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+                    <Ionicons name="chevron-back" size={24} color="#B9FFBC" />
+                </TouchableOpacity>
                 <Text style={styles.header}>Details</Text>
                 <Image source={product.image} style={styles.image} />
                 <TouchableOpacity style={styles.heartButton} onPress={() => toggleFavorite(product.id)}>
@@ -85,13 +88,13 @@ const styles = StyleSheet.create({
     sectionTitle: { fontSize: 18, fontWeight: 'bold', marginTop: 20, marginBottom: 5 },
     description: { fontSize: 15, color: '#666' },
 
-    navBar: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        padding: 12,
-        backgroundColor: '#00794D',
-        position: 'absolute',
-        bottom: 0,
-        width: '100%',
+    backButton: {
+        backgroundColor: "#015C40",
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        justifyContent: "center",
+        alignItems: "center",
+        marginRight: 10,
     },
 });
