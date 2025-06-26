@@ -136,9 +136,6 @@ export default function ProfielScherm() {
                     showsVerticalScrollIndicator={false}
                 >
                     <View style={styles.header}>
-                        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-                            <Ionicons name="chevron-back" size={24} color="#B9FFBC" />
-                        </TouchableOpacity>
                         <Text style={styles.headerTitle}>Mijn Profiel</Text>
                         <View style={{ width: 40 }} />
                     </View>
