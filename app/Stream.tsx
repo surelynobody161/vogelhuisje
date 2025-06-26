@@ -3,7 +3,9 @@ import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import NavBar from './NavBar';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import LiveStream from "../components/LiveStream";
+import { useRouter } from 'expo-router';
 
 export default function Stream() {
     const [note, setNote] = useState('');
@@ -96,11 +98,18 @@ export default function Stream() {
     return (
         <SafeAreaView style={styles.safeArea} edges={['bottom']}>
             <View style={styles.container}>
-                <Text style={styles.header}>Stream</Text>
+                <View style={styles.headerRow}>
+                    <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+                        <Ionicons name="chevron-back" size={28} color="#B9FFBC" />
+                    </TouchableOpacity>
+                    <Text style={styles.header}>Stream</Text>
+                    <View style={{ width: 40 }} />
+                </View>
 
                 {/* Stream Section */}
                 <View style={styles.streamContainer}>
-                    <Text style={styles.streamPlaceholder}>[Stream Playing Here]</Text>
+                    <Text style={styles.streamPlaceholder}></Text>
+                    <LiveStream/>
                 </View>
 
                 {/* Clip Button */}
@@ -143,8 +152,6 @@ export default function Stream() {
                         </View>
                     )}
                 />
-
-                <NavBar />
             </View>
         </SafeAreaView>
     );
@@ -152,16 +159,13 @@ export default function Stream() {
 
 const styles = StyleSheet.create({
     safeArea: { flex: 1, backgroundColor: '#fff' },
-    container: { flex: 1, backgroundColor: '#fff' },
+    container: { flex: 1, backgroundColor: '#fff'},
     header: {
         fontSize: 22,
         fontWeight: 'bold',
         textAlign: 'center',
         color: 'white',
-        backgroundColor: '#00794D',
-        paddingVertical: 20,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        flex: 1,
     },
     streamContainer: {
         height: 200,

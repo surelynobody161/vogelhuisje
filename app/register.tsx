@@ -1,5 +1,6 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 import {
     Alert,
     KeyboardAvoidingView,
@@ -19,10 +20,11 @@ type RootStackParamList = {
 };
 
 export default function Register() {
+    const { register } = useContext(AuthContext);
     const navigation = useNavigation<NavigationProp<RootStackParamList>>()
     const [formData, setFormData] = useState({
         email: "",
-        phone: "",
+        name: "",
         password: "",
         confirmPassword: "",
     })
@@ -45,11 +47,12 @@ export default function Register() {
         setIsSubmitting(true)
 
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1000))
+            await register(formData);
             Alert.alert("Succes", "Account succesvol aangemaakt!")
-            navigation.navigate("Login") // 🔁 Ga terug naar login na registratie
+            navigation.navigate("login")
         } catch (error) {
             Alert.alert("Fout", "Registratie mislukt")
+            throw new Error(error);
         } finally {
             setIsSubmitting(false)
         }
@@ -67,29 +70,25 @@ export default function Register() {
                         <Text style={styles.formTitle}>Registreren</Text>
                     </View>
                     <View style={styles.registerForm}>
-                        {registerMode === "email" ? (
-                            <TextInput
-                                style={styles.textInput}
-                                placeholder="E-mailadres"
-                                placeholderTextColor="#666"
-                                value={formData.email}
-                                onChangeText={(text) => setFormData({ ...formData, email: text })}
-                                keyboardType="email-address"
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                            />
-                        ) : (
-                            <TextInput
-                                style={styles.textInput}
-                                placeholder="Telefoonnummer"
-                                placeholderTextColor="#666"
-                                value={formData.phone}
-                                onChangeText={(text) => setFormData({ ...formData, phone: text })}
-                                keyboardType="phone-pad"
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                            />
-                        )}
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder="E-mailadres"
+                            placeholderTextColor="#666"
+                            value={formData.email}
+                            onChangeText={(text) => setFormData({ ...formData, email: text })}
+                            keyboardType="email-address"
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                        />
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder="Naam"
+                            placeholderTextColor="#666"
+                            value={formData.name}
+                            onChangeText={(text) => setFormData({ ...formData, name: text })}
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                        />
                         <TextInput
                             style={styles.textInput}
                             placeholder="Wachtwoord"

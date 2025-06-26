@@ -1,8 +1,8 @@
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity, StatusBar } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import NavBar from "./NavBar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import NavBar from "@/app/NavBar";
 
 const streams = [
     {
@@ -36,7 +36,7 @@ export default function StreamList() {
     const router = useRouter();
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.container} edges={["bottom"]}>
             <StatusBar barStyle="light-content" backgroundColor="#00804A" />
 
             <View style={styles.header}>
@@ -69,7 +69,6 @@ export default function StreamList() {
                     ))}
                 </View>
             </ScrollView>
-            <NavBar/>
         </SafeAreaView>
     );
 }
@@ -81,8 +80,10 @@ const styles = StyleSheet.create({
     },
     header: {
         backgroundColor: "#017F56",
-        paddingVertical: 30,
-        paddingHorizontal: 16,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        paddingVertical: 20,
+        paddingHorizontal: 10,
         flexDirection: "row",
         alignItems: "center",
     },
