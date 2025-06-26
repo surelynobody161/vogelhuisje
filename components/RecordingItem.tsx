@@ -89,7 +89,24 @@ const styles = StyleSheet.create({
     actionsContainer: {
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
+    },
+    textAndDeleteContainer: {
+        flex: 1,
+        alignItems: "flex-start",
+    },
+    deleteButton: {
+        backgroundColor: "#B9FFBC",
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 18,
+        alignSelf: "flex-start",
+    },
+    deleteButtonText: {
+        fontFamily: "Radikal-Regular",
+        color: "black",
+        fontSize: 13,
+        fontWeight: "600",
     },
     playButton: {
         width: 50,

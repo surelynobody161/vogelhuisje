@@ -3,9 +3,7 @@ import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import LiveStream from "../components/LiveStream";
-import { useRouter } from 'expo-router';
 
 export default function Stream() {
     const [note, setNote] = useState('');
