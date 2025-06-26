@@ -1,6 +1,8 @@
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity, SafeAreaView, StatusBar } from "react-native";
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, StatusBar } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import NavBar from "./NavBar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const streams = [
     {
@@ -67,6 +69,7 @@ export default function StreamList() {
                     ))}
                 </View>
             </ScrollView>
+            <NavBar/>
         </SafeAreaView>
     );
 }

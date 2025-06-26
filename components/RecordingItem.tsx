@@ -1,19 +1,30 @@
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native"
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons";
+import React from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
 
 interface RecordingItemProps {
     recording: {
-        id: string
-        image: any
-        description: string
-        date: string
-    }
+        recording_id: string;
+        image: string;
+        description: string;
+        date: string;
+    };
+    onDelete: () => void;
 }
 
-export default function RecordingItem({ recording }: RecordingItemProps) {
+const imageMap = {
+    'live1.png': require('../assets/images/live1.png'),
+    'live2.png': require('../assets/images/live2.png'),
+    'live3.png': require('../assets/images/live3.png'),
+    'live4.png': require('../assets/images/live4.png'),
+    'live5.png': require('../assets/images/live5.png'),
+};
+
+export default function RecordingItem({ recording, onDelete }: RecordingItemProps) {
     return (
         <View style={styles.container}>
-            <Image source={recording.image} style={styles.image} />
+            <Image source={imageMap[recording.image as keyof typeof imageMap] || imageMap['live1.png']} style={styles.image} />
             <View style={styles.infoContainer}>
                 <View style={styles.descriptionContainer}>
                     <Text style={styles.descriptionLabel}>uw beschrijving</Text>
@@ -24,8 +35,8 @@ export default function RecordingItem({ recording }: RecordingItemProps) {
 
                 <View style={styles.actionsContainer}>
                     <View style={styles.textAndDeleteContainer}>
-                        <TouchableOpacity style={styles.deleteButton}>
-                            <Text style={styles.deleteButtonText}>verwijder opname</Text>
+                        <TouchableOpacity style={styles.deleteButton} onPress={onDelete}>
+                            <Text style={styles.deleteButtonText}>Verwijder opname</Text>
                         </TouchableOpacity>
                     </View>
 
