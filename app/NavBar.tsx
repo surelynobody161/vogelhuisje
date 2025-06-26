@@ -39,7 +39,7 @@ export default function NavBar(): JSX.Element {
             </TouchableOpacity>
 
             {/* Stream → /stream */}
-            <TouchableOpacity onPress={() => handleNavigation('/Stream')}>
+            <TouchableOpacity onPress={() => handleNavigation('/streamlist')}>
                 <View style={styles.iconContainer}>
                     <Image
                         source={
