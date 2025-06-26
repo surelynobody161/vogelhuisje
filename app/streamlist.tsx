@@ -69,6 +69,7 @@ export default function StreamList() {
                     ))}
                 </View>
             </ScrollView>
+            <NavBar />
         </SafeAreaView>
     );
 }

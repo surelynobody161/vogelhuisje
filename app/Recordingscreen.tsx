@@ -1,10 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, ScrollView, StatusBar, TouchableOpacity, StyleSheet, Text, View } from "react-native";
 import RecordingItem from "../components/RecordingItem";
 import NavBar from "./NavBar";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 type Recording = {
     recording_id: string;
@@ -15,7 +16,42 @@ type Recording = {
     note: string;
 };
 
+const recordings = [
+    {
+        id: "1",
+        image: require("../assets/images/bird1.jpg"),
+        description: "een kleine vogeltje in mijn nieuwe tuin",
+        date: "10 juni 2025",
+    },
+    {
+        id: "2",
+        image: require("../assets/images/bird2.jpg"),
+        description: "mooie vogels van vanmorgen",
+        date: "8 juni 2025",
+    },
+    {
+        id: "3",
+        image: require("../assets/images/bird5.jpg"),
+        description: "vogel eieren in het nestkast",
+        date: "5 juni 2025",
+    },
+    {
+        id: "4",
+        image: require("../assets/images/bird3.jpg"),
+        description: "merels paar vlak voor mijn poort",
+        date: "1 juni 2025",
+    },
+    {
+        id: "5",
+        image: require("../assets/images/bird4.jpg"),
+        description: "vogel in het park",
+        date: "28 mei 2025",
+    },
+];
+
 export default function App() {
+    const router = useRouter();
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle="light-content" backgroundColor="#00804A" />
@@ -39,9 +75,9 @@ export default function App() {
                     ))}
                 </View>
             </ScrollView>
-            <NavBar/>
+            <NavBar />
         </SafeAreaView>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -78,4 +114,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingBottom: 20,
     },
-})
+    backButton: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: '#015C40',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
