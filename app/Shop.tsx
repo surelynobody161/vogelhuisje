@@ -38,6 +38,7 @@ export default function Shop() {
         const loadItems = async () => {
             try {
                 const res = await api.getAvailableBirdhouses();
+                console.log(res)
                 setItems(res);
             } catch (err) {
                 console.error('Fout bij laden van birdhouses', err);
@@ -92,7 +93,7 @@ export default function Shop() {
 
                 <FlatList
                     data={filtered}
-                    keyExtractor={item => String(item.id)}
+                    keyExtractor={item => String(item._id)}
                     numColumns={2}
                     columnWrapperStyle={{ justifyContent: 'space-between' }}
                     contentContainerStyle={{ paddingHorizontal: 10 }}

@@ -83,7 +83,7 @@ export default function Slide5() {
                     <View style={styles.authButtonsContainer}>
                         <TouchableOpacity
                             style={[styles.authButton, styles.primaryButton]}
-                            onPress={() => handlePress('/register')}
+                            onPress={() => handlePress('Register')}
                             activeOpacity={0.8}
                         >
                             <LinearGradient
@@ -97,7 +97,7 @@ export default function Slide5() {
 
                         <TouchableOpacity
                             style={[styles.authButton, styles.secondaryButton]}
-                            onPress={() => handlePress('/login')}
+                            onPress={() => handlePress('Login')}
                             activeOpacity={0.8}
                         >
                             <Ionicons name="log-in" size={20} color="#C9FBCF" />

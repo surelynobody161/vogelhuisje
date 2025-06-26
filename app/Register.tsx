@@ -49,7 +49,7 @@ export default function Register() {
         try {
             await register(formData);
             Alert.alert("Succes", "Account succesvol aangemaakt!")
-            navigation.navigate("login")
+            navigation.navigate("Login")
         } catch (error) {
             Alert.alert("Fout", "Registratie mislukt")
             throw new Error(error);

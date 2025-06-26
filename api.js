@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Constants from 'expo-constants';
 
-const BASE_URL = 'http://145.24.223.199';
+const { API_URL } = Constants.expoConfig?.extra;
 
 const fetchWithAuth = async (url, options = {}) => {
     const token = await AsyncStorage.getItem('userToken');
@@ -11,7 +12,7 @@ const fetchWithAuth = async (url, options = {}) => {
         ...options.headers,
     };
 
-    return fetch(`${BASE_URL}${url}`, {
+    return fetch(`${API_URL}${url}`, {
         ...options,
         headers,
     });
@@ -19,14 +20,14 @@ const fetchWithAuth = async (url, options = {}) => {
 
 export default {
     register: (data) =>
-        fetch(`${BASE_URL}/auth/register`, {
+        fetch(`${API_URL}/auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
         }),
 
     login: (data) =>
-        fetch(`${BASE_URL}/auth/login`, {
+        fetch(`${API_URL}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
@@ -44,10 +45,10 @@ export default {
         }),
 
     getShopItems: () =>
-        fetch(`${BASE_URL}/shopitems`).then(res => res.json()),
+        fetch(`${API_URL}/shopitems`).then(res => res.json()),
 
     getShopItemById: (id) =>
-        fetch(`${BASE_URL}/shopitems/${id}`).then(res => res.json()),
+        fetch(`${API_URL}/shopitems/${id}`).then(res => res.json()),
 
     deleteShopItem: (id) =>
         fetchWithAuth(`/shopitems/${id}`, {
@@ -55,6 +56,6 @@ export default {
         }),
 
     getAvailableBirdhouses: () =>
-        fetch(`${BASE_URL}/birdhouses?_available=true`).then(res => res.json()),
+        fetch(`${API_URL}/birdhouses?is_available=true`).then(res => res.json()),
 };
 

@@ -53,7 +53,7 @@ export default function Login() {
     }
 
     const handleRegister = () => {
-        navigation.navigate("register")
+        navigation.navigate("Register")
     }
 
     return (

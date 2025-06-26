@@ -100,11 +100,13 @@ export default function ProfielScherm() {
             {
                 text: "Uitloggen",
                 style: "destructive",
-                onPress: () =>
+                onPress: async () => {
+                    await AsyncStorage.removeItem('jwt');
                     navigation.reset({
                         index: 0,
-                        routes: [{ name: "login" }],
-                    }),
+                        routes: [{ name: "Login" }],
+                    });
+                }
             },
         ])
     }

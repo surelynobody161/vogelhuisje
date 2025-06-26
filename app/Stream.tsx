@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LiveStream from "../components/LiveStream";
+import NavBar from "@/app/NavBar";
 
 export default function Stream() {
     const [note, setNote] = useState('');
@@ -151,6 +152,7 @@ export default function Stream() {
                     )}
                 />
             </View>
+            <NavBar />
         </SafeAreaView>
     );
 }
