@@ -5,7 +5,6 @@ import {
     TouchableOpacity,
     Switch,
     ScrollView,
-    SafeAreaView,
     Alert,
     TextInput,
     StyleSheet,
@@ -17,6 +16,7 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack"
 import * as ImagePicker from "expo-image-picker"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import NavBar from "./NavBar"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 type RootStackParamList = {
     Home: undefined
@@ -128,7 +128,7 @@ export default function ProfielScherm() {
     }
 
     return (
-        <SafeAreaView style={styles.safeArea}>
+        <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
             <View style={styles.container}>
                 <ScrollView
                     style={styles.content}
