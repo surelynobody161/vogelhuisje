@@ -231,8 +231,10 @@ const styles = StyleSheet.create({
     scrollContent: { paddingBottom: 20 },
     header: {
         backgroundColor: "#017F56",
-        paddingVertical: 30,
-        paddingHorizontal: 16,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        paddingVertical: 20,
+        paddingHorizontal: 10,
         flexDirection: "row",
         alignItems: "center",
     },

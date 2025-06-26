@@ -137,10 +137,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
         backgroundColor: '#00794D',
-        paddingVertical: 20,
-        paddingTop: 40,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
+        paddingVertical: 20,
+        paddingHorizontal: 10,
     },
     searchBar: {
         flexDirection: 'row',
